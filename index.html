@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Morning Standard — Set Your Standard</title>
     <meta name="description" content="Premium coffee sachets and cold brew cans. Every morning. No compromise.">
+    <meta name="theme-color" content="#1d1d1f">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
     <style>
         :root {
             --bg: #fafafa;
@@ -22,6 +24,8 @@
             --white: #ffffff;
             --card-bg: #ffffff;
             --border: #d2d2d7;
+            --danger: #ff3b30;
+            --success: #34c759;
             --shadow: 0 4px 24px rgba(0,0,0,0.06);
             --shadow-lg: 0 20px 60px rgba(0,0,0,0.10);
             --shadow-xl: 0 32px 80px rgba(0,0,0,0.14);
@@ -61,14 +65,10 @@
 
         /* ===================== HERO ===================== */
         .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px 24px 100px;position:relative;overflow:hidden;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-alt) 100%)}
-
-        /* Ambient glow */
         .hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:1000px;height:1000px;background:radial-gradient(circle,rgba(196,155,47,0.07) 0%,rgba(196,155,47,0.03) 40%,transparent 70%);border-radius:50%;pointer-events:none;animation:pulseGlow 6s ease-in-out infinite}
         .hero::after{content:'';position:absolute;bottom:-100px;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(60,36,21,0.06) 0%,transparent 70%);pointer-events:none}
-
         @keyframes pulseGlow{0%,100%{transform:translateX(-50%) scale(1);opacity:1}50%{transform:translateX(-50%) scale(1.1);opacity:0.7}}
 
-        /* Floating coffee beans */
         .hero-particles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
         .particle{position:absolute;width:8px;height:12px;background:var(--mocha);border-radius:50% 50% 50% 0;opacity:0.08;animation:floatUp linear infinite}
         .particle:nth-child(1){left:10%;animation-duration:18s;animation-delay:0s;width:6px;height:10px}
@@ -97,26 +97,17 @@
 
         /* ===================== HERO PRODUCT SHOWCASE ===================== */
         .hero-showcase{margin-top:80px;display:flex;align-items:flex-end;justify-content:center;gap:28px;animation:fadeUp 1s ease 0.5s both;perspective:800px;position:relative}
-
-        /* ---- Sachet ---- */
         .sachet{width:140px;height:192px;position:relative;transform:rotateY(-5deg) rotateX(2deg);transition:transform 0.4s ease;cursor:default}
         .sachet:hover{transform:rotateY(0deg) rotateX(0deg) translateY(-12px)}
         .sachet-body{width:100%;height:100%;border-radius:6px 6px 16px 16px;position:relative;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.22),0 4px 12px rgba(0,0,0,0.15),inset 0 1px 0 rgba(255,255,255,0.06)}
-
         .sachet-body.dark{background:linear-gradient(170deg,#2a1d12 0%,#1a120a 40%,#0d0906 100%)}
         .sachet-body.oat{background:linear-gradient(170deg,#d4c5a0 0%,#c4b48a 40%,#a89870 100%)}
         .sachet-body.caramel{background:linear-gradient(170deg,#6b3a1f 0%,#4a2810 40%,#2d1808 100%)}
-
-        /* Foil shine effect */
         .sachet-body::before{content:'';position:absolute;top:0;left:-50%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent);transform:skewX(-20deg);animation:sachetShine 4s ease-in-out infinite;pointer-events:none}
         @keyframes sachetShine{0%,100%{left:-50%}50%{left:120%}}
-
-        /* Tear notch */
         .sachet-tear{position:absolute;top:0;left:0;right:0;height:20px;display:flex;align-items:center;justify-content:center}
         .sachet-tear::before{content:'';width:24px;height:0;border-top:2px dashed rgba(255,255,255,0.2)}
         .sachet-tear-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:10px;height:6px;background:transparent;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid rgba(196,155,47,0.5)}
-
-        /* Sachet label content */
         .sachet-label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 14px 20px;text-align:center}
         .sachet-brand{font-size:7px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);opacity:0.9}
         .sachet-line{width:32px;height:1px;background:var(--accent);opacity:0.4;margin:8px 0}
@@ -128,32 +119,18 @@
         .sachet-body.oat .sachet-type{color:rgba(42,29,18,0.5)}
         .sachet-weight{position:absolute;bottom:12px;font-size:7px;color:rgba(245,245,247,0.3);letter-spacing:0.05em}
         .sachet-body.oat .sachet-weight{color:rgba(42,29,18,0.3)}
-
-        /* Gold seal on sachet */
         .sachet-seal{position:absolute;bottom:32px;width:28px;height:28px;border-radius:50%;border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;opacity:0.5}
         .sachet-seal::after{content:'MS';font-size:7px;font-weight:800;color:var(--accent);letter-spacing:0.05em}
-
-        /* ---- CAN ---- */
         .can{width:96px;height:260px;position:relative;transition:transform 0.4s ease;cursor:default}
         .can:hover{transform:translateY(-16px)}
         .can-body{width:100%;height:100%;border-radius:12px 12px 16px 16px;position:relative;overflow:hidden;box-shadow:0 28px 72px rgba(0,0,0,0.25),0 4px 16px rgba(0,0,0,0.18)}
-
         .can-body.black{background:linear-gradient(180deg,#1a1a1a 0%,#111 50%,#0a0a0a 100%)}
         .can-body.oat-can{background:linear-gradient(180deg,#f0ead6 0%,#e6ddc8 50%,#d9cfb8 100%)}
-        .can-body.mocha-can{background:linear-gradient(180deg,#3c2415 0%,#2a1a0e 50%,#1a0f08 100%)}
-
-        /* Can metallic top */
         .can-top{position:absolute;top:0;left:0;right:0;height:24px;background:linear-gradient(180deg,#c0c0c0 0%,#a0a0a0 40%,#888 100%);border-radius:12px 12px 0 0;display:flex;align-items:center;justify-content:center}
         .can-top::before{content:'';width:50px;height:14px;border-radius:7px;border:1.5px solid rgba(0,0,0,0.2);background:linear-gradient(180deg,#b0b0b0,#909090);position:relative;top:1px}
-
-        /* Pull tab */
         .can-tab{position:absolute;top:3px;left:50%;transform:translateX(-50%);width:20px;height:10px;border-radius:5px 5px 3px 3px;background:linear-gradient(180deg,#d0d0d0,#aaa);border:1px solid rgba(0,0,0,0.15);z-index:2}
         .can-tab::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:6px;height:4px;border-radius:50%;border:1px solid rgba(0,0,0,0.15)}
-
-        /* Can rim at bottom */
         .can-bottom{position:absolute;bottom:0;left:0;right:0;height:8px;background:linear-gradient(0deg,#c0c0c0,#a0a0a0);border-radius:0 0 16px 16px}
-
-        /* Can label band */
         .can-label{position:absolute;top:40px;left:0;right:0;bottom:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 10px;text-align:center}
         .can-brand{font-size:6px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent)}
         .can-divider{width:24px;height:1px;background:var(--accent);opacity:0.4;margin:6px 0}
@@ -165,16 +142,9 @@
         .can-body.oat-can .can-sub{color:rgba(42,29,18,0.4)}
         .can-ml{font-size:6px;color:rgba(245,245,247,0.25);margin-top:8px;letter-spacing:0.05em}
         .can-body.oat-can .can-ml{color:rgba(42,29,18,0.25)}
-
-        /* Metallic shimmer on can */
         .can-body::before{content:'';position:absolute;top:0;right:-10px;width:40px;height:100%;background:linear-gradient(180deg,transparent,rgba(255,255,255,0.04),transparent);transform:skewX(-5deg);pointer-events:none}
         .can-body::after{content:'';position:absolute;top:24px;left:8px;width:1px;height:calc(100% - 40px);background:linear-gradient(180deg,transparent,rgba(255,255,255,0.06),transparent);pointer-events:none}
-
-        /* ---- Shadows under products ---- */
         .product-shadow{position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:70%;height:20px;background:radial-gradient(ellipse,rgba(0,0,0,0.15) 0%,transparent 70%);border-radius:50%}
-
-        /* ---- Floating labels ---- */
-        .showcase-label{position:absolute;bottom:-48px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:12px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em}
 
         /* ===================== MARQUEE ===================== */
         .marquee-section{padding:40px 0;overflow:hidden;border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border);background:var(--bg)}
@@ -183,23 +153,18 @@
         .marquee-dot{width:5px;height:5px;background:var(--accent);border-radius:50%;opacity:0.5}
         @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-        /* ===================== PRODUCTS SECTION ===================== */
+        /* ===================== SECTIONS ===================== */
         #products{background:var(--bg-alt);padding:140px 24px}
         .section-header{text-align:center;max-width:680px;margin:0 auto 72px}
         .section-label{font-size:14px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px}
         .section-header h2{font-size:clamp(36px,5.5vw,60px);font-weight:700;letter-spacing:-0.035em;line-height:1.08}
         .section-header p{font-size:19px;color:var(--text-secondary);margin-top:16px;line-height:1.6}
-
         .products-grid{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
-
         .product-card{background:var(--card-bg);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform 0.4s ease,box-shadow 0.4s ease;position:relative}
         .product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-xl)}
-
         .product-card-visual{height:280px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
         .product-card-visual.sachet-bg{background:linear-gradient(135deg,#1a120a 0%,#2a1d12 50%,#3c2a18 100%)}
         .product-card-visual.can-bg{background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 50%,#2a2a2a 100%)}
-
-        /* Mini product in card */
         .card-sachet-group{display:flex;gap:12px;align-items:flex-end;transform:rotate(-3deg)}
         .card-sachet{width:72px;height:100px;border-radius:4px 4px 10px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 12px 32px rgba(0,0,0,0.3)}
         .card-sachet.s1{background:linear-gradient(170deg,#2a1d12,#0d0906);transform:translateY(-8px)}
@@ -207,7 +172,6 @@
         .card-sachet.s3{background:linear-gradient(170deg,#6b3a1f,#2d1808);transform:translateY(-4px)}
         .card-sachet span{font-size:6px;font-weight:700;letter-spacing:0.15em;color:var(--accent);text-transform:uppercase}
         .card-sachet.s2 span{color:#6b5a3a}
-
         .card-can-group{display:flex;gap:16px;align-items:flex-end}
         .card-can{width:52px;height:140px;border-radius:8px 8px 10px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;box-shadow:0 12px 32px rgba(0,0,0,0.3)}
         .card-can.c1{background:linear-gradient(180deg,#1a1a1a,#0a0a0a);transform:translateY(-10px)}
@@ -216,55 +180,41 @@
         .card-can span{font-size:5px;font-weight:700;letter-spacing:0.12em;color:var(--accent);text-transform:uppercase}
         .card-can.c2 span{color:#6b5a3a}
         .card-can-top{position:absolute;top:0;left:0;right:0;height:12px;background:linear-gradient(180deg,#b0b0b0,#808080);border-radius:8px 8px 0 0}
-
-        /* Glow behind card products */
         .product-card-visual::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:60%;height:40%;background:radial-gradient(ellipse,rgba(196,155,47,0.1) 0%,transparent 70%);pointer-events:none}
-
         .product-card-info{padding:36px 32px 40px}
         .product-card-info h3{font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:4px}
         .product-card-info .price{font-size:17px;font-weight:600;color:var(--accent);margin-bottom:14px}
         .product-card-info p{font-size:15px;color:var(--text-secondary);line-height:1.65}
-
         .flavor-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
         .flavor-pill{font-size:12px;font-weight:600;padding:6px 14px;border-radius:980px;background:var(--bg-alt);color:var(--text-secondary);border:1px solid var(--border)}
         @media(prefers-color-scheme:dark){.flavor-pill{background:#2a2a2a;border-color:#3a3a3a}}
 
-        /* ===================== FEATURES / WHY US ===================== */
         #why{padding:140px 24px}
         .features-grid{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
         .feature{background:var(--card-bg);padding:44px 28px;text-align:center;transition:background 0.3s}
         .feature:hover{background:var(--bg-alt)}
-
         .feature-icon-wrap{width:64px;height:64px;margin:0 auto 24px;border-radius:18px;background:var(--accent-glow);display:flex;align-items:center;justify-content:center}
         .feature-icon-wrap svg{width:28px;height:28px;stroke:var(--accent);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
         .feature h3{font-size:20px;font-weight:700;letter-spacing:-0.01em;margin-bottom:8px}
         .feature p{font-size:14px;color:var(--text-secondary);line-height:1.6}
-
         @media(max-width:900px){.features-grid{grid-template-columns:repeat(2,1fr)}}
         @media(max-width:500px){.features-grid{grid-template-columns:1fr}}
 
-        /* ===================== BIG QUOTE ===================== */
         .big-quote{padding:120px 24px;text-align:center;background:var(--bg-dark);color:#f5f5f7;position:relative;overflow:hidden}
         .big-quote::before{content:'\201C';position:absolute;top:-40px;left:50%;transform:translateX(-50%);font-size:300px;font-weight:700;color:rgba(196,155,47,0.06);line-height:1;pointer-events:none}
         .big-quote blockquote{max-width:700px;margin:0 auto;font-size:clamp(24px,4vw,36px);font-weight:600;letter-spacing:-0.02em;line-height:1.4;position:relative;z-index:1}
         .big-quote .quote-author{margin-top:24px;font-size:15px;color:rgba(245,245,247,0.5);font-weight:400}
 
-        /* ===================== HOW IT WORKS ===================== */
         #how{background:var(--bg-alt);padding:140px 24px}
         .steps{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
         .step{text-align:center;padding:40px 28px;background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);transition:transform 0.3s,box-shadow 0.3s;position:relative}
         .step:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-
         .step-number{width:56px;height:56px;border-radius:50%;background:var(--text-primary);color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;margin:0 auto 20px}
         .step h3{font-size:20px;font-weight:700;letter-spacing:-0.01em;margin-bottom:8px}
         .step p{font-size:15px;color:var(--text-secondary);line-height:1.6}
-
-        /* Connector arrows between steps */
         .step:not(:last-child)::after{content:'';position:absolute;top:50%;right:-20px;width:12px;height:12px;border-top:2px solid var(--border);border-right:2px solid var(--border);transform:rotate(45deg);z-index:2}
-
         @media(max-width:768px){.steps{grid-template-columns:1fr;gap:16px}.step::after{display:none}}
 
-        /* ===================== TESTIMONIALS ===================== */
         #reviews{padding:140px 24px}
         .testimonials-grid{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
         .testimonial{background:var(--card-bg);border-radius:var(--radius);padding:40px 36px;box-shadow:var(--shadow);transition:transform 0.3s;position:relative}
@@ -278,14 +228,12 @@
         .testimonial-info .testimonial-author{font-size:15px;font-weight:600}
         .testimonial-info .testimonial-handle{font-size:13px;color:var(--text-tertiary)}
 
-        /* ===================== NUMBERS ===================== */
         .numbers{padding:100px 24px;background:var(--bg-alt);border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border)}
         .numbers-grid{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
         .number-item .num{font-size:clamp(36px,5vw,52px);font-weight:700;letter-spacing:-0.03em;background:linear-gradient(135deg,var(--accent-dark),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
         .number-item .num-label{font-size:14px;color:var(--text-secondary);margin-top:4px}
         @media(max-width:600px){.numbers-grid{grid-template-columns:repeat(2,1fr);gap:32px}}
 
-        /* ===================== WAITLIST ===================== */
         #waitlist{padding:140px 24px;background:var(--bg)}
         .waitlist-box{max-width:580px;margin:0 auto;text-align:center}
         .waitlist-box h2{font-size:clamp(36px,5vw,52px);font-weight:700;letter-spacing:-0.035em;line-height:1.1}
@@ -302,7 +250,6 @@
         .perk svg{width:16px;height:16px;stroke:var(--accent);fill:none;stroke-width:2}
         .success-message{display:none;padding:24px;background:var(--accent-glow);border:1px solid rgba(196,155,47,0.2);border-radius:var(--radius-sm);margin-top:24px;font-size:17px;font-weight:500;color:var(--accent)}
 
-        /* ===================== FOOTER ===================== */
         footer{padding:60px 24px 40px;text-align:center;border-top:0.5px solid var(--border)}
         .footer-inner{max-width:800px;margin:0 auto}
         .footer-logo{font-size:20px;font-weight:700;letter-spacing:-0.02em;margin-bottom:20px}
@@ -325,8 +272,6 @@
         .modal-close{width:36px;height:36px;border-radius:50%;border:none;background:var(--bg-alt);color:var(--text-secondary);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s}
         .modal-close:hover{background:var(--border)}
         .modal-body{padding:24px 32px 32px}
-
-        /* Product picker */
         .order-product{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border)}
         .order-product:last-of-type{border-bottom:none}
         .order-product-info{display:flex;align-items:center;gap:14px}
@@ -340,18 +285,14 @@
         .swatch-mocha{background:linear-gradient(135deg,#3c2415,#1a0f08)}
         .order-product-name{font-size:15px;font-weight:600}
         .order-product-price{font-size:13px;color:var(--text-secondary)}
-        .qty-control{display:flex;align-items:center;gap:0;border:1.5px solid var(--border);border-radius:10px;overflow:hidden}
+        .qty-control{display:flex;align-items:center;border:1.5px solid var(--border);border-radius:10px;overflow:hidden}
         .qty-btn{width:36px;height:36px;border:none;background:var(--bg-alt);color:var(--text-primary);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.15s;font-family:inherit}
         .qty-btn:hover{background:var(--border)}
         .qty-val{width:40px;text-align:center;font-size:15px;font-weight:600;border:none;background:transparent;color:var(--text-primary);font-family:inherit}
-
         .order-summary{background:var(--bg-alt);border-radius:var(--radius-sm);padding:20px;margin-top:20px}
         .order-summary-row{display:flex;justify-content:space-between;font-size:14px;color:var(--text-secondary);padding:4px 0}
         .order-summary-total{display:flex;justify-content:space-between;font-size:18px;font-weight:700;padding:12px 0 0;border-top:1.5px solid var(--border);margin-top:8px}
-
         .order-section-label{font-size:13px;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:0.06em;margin:24px 0 12px}
-
-        /* Customer info form fields */
         .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
         .form-row.full{grid-template-columns:1fr}
         .form-field{display:flex;flex-direction:column;gap:4px}
@@ -359,56 +300,76 @@
         .form-field input,.form-field textarea{padding:12px 16px;border-radius:10px;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text-primary);font-size:15px;font-family:inherit;outline:none;transition:border-color 0.2s,box-shadow 0.2s}
         .form-field input:focus,.form-field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
         .form-field textarea{resize:vertical;min-height:60px}
-
         .btn-order{width:100%;padding:18px;border-radius:980px;background:var(--text-primary);color:var(--bg);font-size:17px;font-weight:600;font-family:inherit;border:none;cursor:pointer;margin-top:24px;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 16px rgba(0,0,0,0.12)}
         .btn-order:hover{transform:scale(1.02);box-shadow:0 8px 32px rgba(0,0,0,0.18)}
         .btn-order:disabled{opacity:0.5;cursor:not-allowed;transform:none}
-
         .order-success{text-align:center;padding:48px 24px}
         .order-success-icon{width:72px;height:72px;border-radius:50%;background:var(--accent-glow);display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
         .order-success-icon svg{width:32px;height:32px;stroke:var(--accent);fill:none;stroke-width:2.5}
         .order-success h3{font-size:24px;font-weight:700;margin-bottom:8px}
         .order-success p{font-size:15px;color:var(--text-secondary);line-height:1.6}
         .order-id{display:inline-block;background:var(--bg-alt);padding:6px 16px;border-radius:8px;font-size:14px;font-weight:600;font-family:monospace;margin-top:12px;color:var(--accent)}
-
+        .btn-back{background:none;border:none;color:var(--accent);font-size:14px;font-weight:600;cursor:pointer;padding:0;margin-bottom:8px;font-family:inherit;display:flex;align-items:center;gap:4px}
+        .btn-back:hover{text-decoration:underline}
         @media(max-width:600px){.form-row{grid-template-columns:1fr}.modal-body{padding:20px}.modal-header{padding:20px 20px 0}}
+
+        /* Spinner */
+        .spinner{display:inline-block;width:20px;height:20px;border:2.5px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.6s linear infinite;vertical-align:middle;margin-right:8px}
+        @keyframes spin{to{transform:rotate(360deg)}}
+
+        /* Toast notifications */
+        .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--bg-dark);color:#f5f5f7;padding:14px 28px;border-radius:14px;font-size:15px;font-weight:500;z-index:300;box-shadow:var(--shadow-lg);transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);pointer-events:none}
+        .toast.show{transform:translateX(-50%) translateY(0)}
+        .toast.error{background:var(--danger)}
 
         /* ===================== ADMIN DASHBOARD ===================== */
         .admin-page{display:none;min-height:100vh;padding:80px 24px 40px;background:var(--bg)}
         .admin-page.active{display:block}
-        .admin-page .admin-header{max-width:1100px;margin:0 auto 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
-        .admin-page .admin-header h1{font-size:28px;font-weight:700;letter-spacing:-0.02em}
+        .admin-header{max-width:1100px;margin:0 auto 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+        .admin-header h1{font-size:28px;font-weight:700;letter-spacing:-0.02em}
         .admin-actions{display:flex;gap:12px;flex-wrap:wrap}
-        .btn-admin{padding:10px 22px;border-radius:980px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;transition:transform 0.2s,opacity 0.2s;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text-primary)}
+        .btn-admin{padding:10px 22px;border-radius:980px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;transition:transform 0.2s;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text-primary)}
         .btn-admin:hover{transform:scale(1.02)}
         .btn-admin.primary{background:var(--text-primary);color:var(--bg);border-color:var(--text-primary)}
-
+        .btn-admin.danger{background:transparent;border-color:var(--danger);color:var(--danger)}
         .admin-stats{max-width:1100px;margin:0 auto 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
         .admin-stat{background:var(--card-bg);border-radius:var(--radius-sm);padding:24px;box-shadow:var(--shadow)}
         .admin-stat .stat-val{font-size:32px;font-weight:700;letter-spacing:-0.02em}
         .admin-stat .stat-val.gold{color:var(--accent)}
         .admin-stat .stat-label{font-size:13px;color:var(--text-secondary);margin-top:4px}
 
-        .admin-table-wrap{max-width:1100px;margin:0 auto;background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-        .admin-table{width:100%;border-collapse:collapse;font-size:14px}
-        .admin-table th{text-align:left;padding:14px 16px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-tertiary);background:var(--bg-alt);border-bottom:1px solid var(--border);position:sticky;top:52px;z-index:1}
+        .admin-toolbar{max-width:1100px;margin:0 auto 20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+        .admin-search{flex:1;min-width:200px;padding:12px 20px;border-radius:12px;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text-primary);font-size:15px;font-family:inherit;outline:none;transition:border-color 0.2s}
+        .admin-search:focus{border-color:var(--accent)}
+        .admin-filter{padding:10px 18px;border-radius:10px;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text-primary);font-size:14px;font-family:inherit;cursor:pointer;outline:none}
+
+        .admin-table-wrap{max-width:1100px;margin:0 auto;background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto}
+        .admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:800px}
+        .admin-table th{text-align:left;padding:14px 16px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-tertiary);background:var(--bg-alt);border-bottom:1px solid var(--border)}
         .admin-table td{padding:14px 16px;border-bottom:1px solid var(--border);vertical-align:top}
         .admin-table tr:last-child td{border-bottom:none}
         .admin-table tr:hover td{background:var(--bg-alt)}
         .order-items-list{font-size:13px;color:var(--text-secondary);line-height:1.6}
-        .order-status{display:inline-block;padding:3px 10px;border-radius:980px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em}
+        .order-status{display:inline-block;padding:3px 10px;border-radius:980px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;cursor:pointer;transition:opacity 0.2s;border:none;font-family:inherit}
+        .order-status:hover{opacity:0.7}
         .order-status.pending{background:rgba(196,155,47,0.12);color:var(--accent)}
-        .order-status.confirmed{background:rgba(52,199,89,0.12);color:#34c759}
-
+        .order-status.confirmed{background:rgba(52,199,89,0.12);color:var(--success)}
+        .order-status.shipped{background:rgba(0,122,255,0.12);color:#007aff}
+        .order-status.cancelled{background:rgba(255,59,48,0.12);color:var(--danger)}
         .admin-empty{text-align:center;padding:80px 24px;color:var(--text-tertiary);font-size:16px}
-
         .admin-login{max-width:400px;margin:120px auto;text-align:center;padding:0 24px}
         .admin-login h2{font-size:24px;font-weight:700;margin-bottom:8px}
         .admin-login p{font-size:15px;color:var(--text-secondary);margin-bottom:24px}
-        .admin-login input{width:100%;padding:16px 20px;border-radius:12px;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text-primary);font-size:16px;font-family:inherit;outline:none;text-align:center;letter-spacing:0.1em;margin-bottom:16px;transition:border-color 0.2s}
+        .admin-login input{width:100%;padding:16px 20px;border-radius:12px;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text-primary);font-size:16px;font-family:inherit;outline:none;text-align:center;margin-bottom:16px;transition:border-color 0.2s}
         .admin-login input:focus{border-color:var(--accent)}
         .admin-login .btn-order{margin-top:0}
-        .admin-login-error{font-size:13px;color:#ff3b30;margin-top:8px;display:none}
+        .admin-login-error{font-size:13px;color:var(--danger);margin-top:8px;display:none}
+        .admin-realtime{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--success);font-weight:500}
+        .admin-realtime .live-dot{width:8px;height:8px;background:var(--success);border-radius:50%;animation:blink 2s ease-in-out infinite}
+        .order-address{font-size:12px;color:var(--text-tertiary);line-height:1.4;margin-top:2px}
+        .order-notes{font-size:12px;color:var(--text-tertiary);font-style:italic;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .order-delete{background:none;border:none;color:var(--text-tertiary);cursor:pointer;font-size:16px;padding:4px;border-radius:6px;transition:color 0.2s,background 0.2s}
+        .order-delete:hover{color:var(--danger);background:rgba(255,59,48,0.08)}
 
         @media(max-width:768px){.admin-table{font-size:12px}.admin-table th,.admin-table td{padding:10px 12px}}
 
@@ -449,17 +410,17 @@
             <li><a href="#reviews">Reviews</a></li>
             <li><a href="#preorder" class="nav-cta" onclick="event.preventDefault();openPreorder()">Pre-Order</a></li>
         </ul>
-        <button class="nav-menu-btn" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})" aria-label="Join waitlist">&#8594;</button>
+        <button class="nav-menu-btn" onclick="openPreorder()" aria-label="Pre-order">&#8594;</button>
     </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="mainSite">
     <div class="hero-particles">
         <div class="particle"></div><div class="particle"></div><div class="particle"></div>
         <div class="particle"></div><div class="particle"></div><div class="particle"></div>
     </div>
-    <span class="hero-badge"><span class="dot"></span> Now accepting early access</span>
+    <span class="hero-badge"><span class="dot"></span> Now accepting pre-orders</span>
     <h1>Set Your <span class="accent">Standard.</span></h1>
     <p class="hero-sub">Premium coffee sachets and cold brew cans crafted for people who refuse to settle. Every morning. No compromise.</p>
     <p class="hero-founder">Founded by <strong>Simiran Jha</strong></p>
@@ -470,90 +431,12 @@
         </a>
         <a href="#products" class="btn-secondary">Explore Products</a>
     </div>
-
-    <!-- DETAILED PRODUCT SHOWCASE -->
     <div class="hero-showcase">
-        <!-- Sachet 1: Original Black -->
-        <div class="sachet">
-            <div class="sachet-body dark">
-                <div class="sachet-tear"><div class="sachet-tear-notch"></div></div>
-                <div class="sachet-label">
-                    <span class="sachet-brand">Morning Standard</span>
-                    <div class="sachet-line"></div>
-                    <span class="sachet-flavor">Original<br>Black</span>
-                    <span class="sachet-type">Single Origin</span>
-                </div>
-                <div class="sachet-seal"></div>
-                <span class="sachet-weight">12g / 0.42oz</span>
-            </div>
-            <div class="product-shadow"></div>
-        </div>
-
-        <!-- Can 1: Black Cold Brew -->
-        <div class="can">
-            <div class="can-body black">
-                <div class="can-top"></div>
-                <div class="can-tab"></div>
-                <div class="can-label">
-                    <span class="can-brand">Morning Standard</span>
-                    <div class="can-divider"></div>
-                    <span class="can-flavor">Black<br>Cold Brew</span>
-                    <span class="can-sub">Nitrogen Infused</span>
-                    <span class="can-ml">250ml / 8.4 fl oz</span>
-                </div>
-                <div class="can-bottom"></div>
-            </div>
-            <div class="product-shadow"></div>
-        </div>
-
-        <!-- Sachet 2: Oat Latte -->
-        <div class="sachet">
-            <div class="sachet-body oat">
-                <div class="sachet-tear"><div class="sachet-tear-notch"></div></div>
-                <div class="sachet-label">
-                    <span class="sachet-brand">Morning Standard</span>
-                    <div class="sachet-line"></div>
-                    <span class="sachet-flavor">Oat<br>Latte</span>
-                    <span class="sachet-type">Plant Based</span>
-                </div>
-                <div class="sachet-seal"></div>
-                <span class="sachet-weight">15g / 0.53oz</span>
-            </div>
-            <div class="product-shadow"></div>
-        </div>
-
-        <!-- Can 2: Oat Milk -->
-        <div class="can">
-            <div class="can-body oat-can">
-                <div class="can-top"></div>
-                <div class="can-tab"></div>
-                <div class="can-label">
-                    <span class="can-brand">Morning Standard</span>
-                    <div class="can-divider"></div>
-                    <span class="can-flavor">Oat Milk<br>Latte</span>
-                    <span class="can-sub">Smooth &amp; Creamy</span>
-                    <span class="can-ml">250ml / 8.4 fl oz</span>
-                </div>
-                <div class="can-bottom"></div>
-            </div>
-            <div class="product-shadow"></div>
-        </div>
-
-        <!-- Sachet 3: Caramel -->
-        <div class="sachet">
-            <div class="sachet-body caramel">
-                <div class="sachet-tear"><div class="sachet-tear-notch"></div></div>
-                <div class="sachet-label">
-                    <span class="sachet-brand">Morning Standard</span>
-                    <div class="sachet-line"></div>
-                    <span class="sachet-flavor">Salted<br>Caramel</span>
-                    <span class="sachet-type">Flavored Blend</span>
-                </div>
-                <div class="sachet-seal"></div>
-                <span class="sachet-weight">14g / 0.49oz</span>
-            </div>
-            <div class="product-shadow"></div>
-        </div>
+        <div class="sachet"><div class="sachet-body dark"><div class="sachet-tear"><div class="sachet-tear-notch"></div></div><div class="sachet-label"><span class="sachet-brand">Morning Standard</span><div class="sachet-line"></div><span class="sachet-flavor">Original<br>Black</span><span class="sachet-type">Single Origin</span></div><div class="sachet-seal"></div><span class="sachet-weight">12g / 0.42oz</span></div><div class="product-shadow"></div></div>
+        <div class="can"><div class="can-body black"><div class="can-top"></div><div class="can-tab"></div><div class="can-label"><span class="can-brand">Morning Standard</span><div class="can-divider"></div><span class="can-flavor">Black<br>Cold Brew</span><span class="can-sub">Nitrogen Infused</span><span class="can-ml">250ml / 8.4 fl oz</span></div><div class="can-bottom"></div></div><div class="product-shadow"></div></div>
+        <div class="sachet"><div class="sachet-body oat"><div class="sachet-tear"><div class="sachet-tear-notch"></div></div><div class="sachet-label"><span class="sachet-brand">Morning Standard</span><div class="sachet-line"></div><span class="sachet-flavor">Oat<br>Latte</span><span class="sachet-type">Plant Based</span></div><div class="sachet-seal"></div><span class="sachet-weight">15g / 0.53oz</span></div><div class="product-shadow"></div></div>
+        <div class="can"><div class="can-body oat-can"><div class="can-top"></div><div class="can-tab"></div><div class="can-label"><span class="can-brand">Morning Standard</span><div class="can-divider"></div><span class="can-flavor">Oat Milk<br>Latte</span><span class="can-sub">Smooth &amp; Creamy</span><span class="can-ml">250ml / 8.4 fl oz</span></div><div class="can-bottom"></div></div><div class="product-shadow"></div></div>
+        <div class="sachet"><div class="sachet-body caramel"><div class="sachet-tear"><div class="sachet-tear-notch"></div></div><div class="sachet-label"><span class="sachet-brand">Morning Standard</span><div class="sachet-line"></div><span class="sachet-flavor">Salted<br>Caramel</span><span class="sachet-type">Flavored Blend</span></div><div class="sachet-seal"></div><span class="sachet-weight">14g / 0.49oz</span></div><div class="product-shadow"></div></div>
     </div>
 </section>
 
@@ -581,89 +464,27 @@
 
 <!-- PRODUCTS -->
 <section id="products">
-    <div class="section-header reveal">
-        <p class="section-label">Products</p>
-        <h2>Two formats.<br>One standard.</h2>
-        <p>Whether you're at home or on the move, we've got your morning covered.</p>
-    </div>
+    <div class="section-header reveal"><p class="section-label">Products</p><h2>Two formats.<br>One standard.</h2><p>Whether you're at home or on the move, we've got your morning covered.</p></div>
     <div class="products-grid">
         <div class="product-card reveal">
-            <div class="product-card-visual sachet-bg">
-                <div class="card-sachet-group">
-                    <div class="card-sachet s1"><span>Original</span></div>
-                    <div class="card-sachet s2"><span>Oat Latte</span></div>
-                    <div class="card-sachet s3"><span>Caramel</span></div>
-                </div>
-            </div>
-            <div class="product-card-info">
-                <h3>Coffee Sachets</h3>
-                <p class="price">From $18 / box of 12</p>
-                <p>Specialty-grade instant coffee in single-serve sachets. Tear, pour, stir. Cafe-quality in 30 seconds flat.</p>
-                <div class="flavor-pills">
-                    <span class="flavor-pill">Original Black</span>
-                    <span class="flavor-pill">Oat Latte</span>
-                    <span class="flavor-pill">Vanilla</span>
-                    <span class="flavor-pill">Salted Caramel</span>
-                </div>
-            </div>
+            <div class="product-card-visual sachet-bg"><div class="card-sachet-group"><div class="card-sachet s1"><span>Original</span></div><div class="card-sachet s2"><span>Oat Latte</span></div><div class="card-sachet s3"><span>Caramel</span></div></div></div>
+            <div class="product-card-info"><h3>Coffee Sachets</h3><p class="price">From $18 / box of 12</p><p>Specialty-grade instant coffee in single-serve sachets. Tear, pour, stir. Cafe-quality in 30 seconds flat.</p><div class="flavor-pills"><span class="flavor-pill">Original Black</span><span class="flavor-pill">Oat Latte</span><span class="flavor-pill">Vanilla</span><span class="flavor-pill">Salted Caramel</span></div></div>
         </div>
         <div class="product-card reveal reveal-delay-1">
-            <div class="product-card-visual can-bg">
-                <div class="card-can-group">
-                    <div class="card-can c1"><div class="card-can-top"></div><span>Black</span></div>
-                    <div class="card-can c2"><div class="card-can-top"></div><span>Oat</span></div>
-                    <div class="card-can c3"><div class="card-can-top"></div><span>Mocha</span></div>
-                </div>
-            </div>
-            <div class="product-card-info">
-                <h3>Cold Brew Cans</h3>
-                <p class="price">From $24 / pack of 6</p>
-                <p>Smooth, nitrogen-infused cold brew in a slim can. Zero sugar. Clean energy. Perfectly chilled and ready to go.</p>
-                <div class="flavor-pills">
-                    <span class="flavor-pill">Black Cold Brew</span>
-                    <span class="flavor-pill">Oat Milk Latte</span>
-                    <span class="flavor-pill">Mocha</span>
-                </div>
-            </div>
+            <div class="product-card-visual can-bg"><div class="card-can-group"><div class="card-can c1"><div class="card-can-top"></div><span>Black</span></div><div class="card-can c2"><div class="card-can-top"></div><span>Oat</span></div><div class="card-can c3"><div class="card-can-top"></div><span>Mocha</span></div></div></div>
+            <div class="product-card-info"><h3>Cold Brew Cans</h3><p class="price">From $24 / pack of 6</p><p>Smooth, nitrogen-infused cold brew in a slim can. Zero sugar. Clean energy. Perfectly chilled and ready to go.</p><div class="flavor-pills"><span class="flavor-pill">Black Cold Brew</span><span class="flavor-pill">Oat Milk Latte</span><span class="flavor-pill">Mocha</span></div></div>
         </div>
     </div>
 </section>
 
 <!-- WHY US -->
 <section id="why">
-    <div class="section-header reveal">
-        <p class="section-label">Why Morning Standard</p>
-        <h2>Coffee that respects<br>your time and taste.</h2>
-    </div>
+    <div class="section-header reveal"><p class="section-label">Why Morning Standard</p><h2>Coffee that respects<br>your time and taste.</h2></div>
     <div class="features-grid reveal">
-        <div class="feature">
-            <div class="feature-icon-wrap">
-                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </div>
-            <h3>Specialty Grade</h3>
-            <p>Sourced from the top 3% of beans worldwide. Single-origin, ethically traded, always fresh roasted.</p>
-        </div>
-        <div class="feature">
-            <div class="feature-icon-wrap">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <h3>30-Second Ritual</h3>
-            <p>No machines, no mess. Just tear, pour, and enjoy. Designed for real mornings.</p>
-        </div>
-        <div class="feature">
-            <div class="feature-icon-wrap">
-                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <h3>Clean Ingredients</h3>
-            <p>No artificial flavors, no added sugar, no preservatives. Just coffee done right.</p>
-        </div>
-        <div class="feature">
-            <div class="feature-icon-wrap">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-            </div>
-            <h3>Sustainable</h3>
-            <p>Compostable sachets. Recyclable cans. Carbon-neutral shipping.</p>
-        </div>
+        <div class="feature"><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><h3>Specialty Grade</h3><p>Sourced from the top 3% of beans worldwide. Single-origin, ethically traded, always fresh roasted.</p></div>
+        <div class="feature"><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h3>30-Second Ritual</h3><p>No machines, no mess. Just tear, pour, and enjoy. Designed for real mornings.</p></div>
+        <div class="feature"><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Clean Ingredients</h3><p>No artificial flavors, no added sugar, no preservatives. Just coffee done right.</p></div>
+        <div class="feature"><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h3>Sustainable</h3><p>Compostable sachets. Recyclable cans. Carbon-neutral shipping.</p></div>
     </div>
 </section>
 
@@ -675,109 +496,31 @@
 
 <!-- HOW IT WORKS -->
 <section id="how">
-    <div class="section-header reveal">
-        <p class="section-label">How It Works</p>
-        <h2>Simple as it should be.</h2>
-    </div>
+    <div class="section-header reveal"><p class="section-label">How It Works</p><h2>Simple as it should be.</h2></div>
     <div class="steps">
-        <div class="step reveal">
-            <div class="step-number">1</div>
-            <h3>Pick your format</h3>
-            <p>Sachets for hot coffee, cans for cold brew. Mix and match to build your perfect box.</p>
-        </div>
-        <div class="step reveal reveal-delay-1">
-            <div class="step-number">2</div>
-            <h3>We deliver</h3>
-            <p>Free shipping on every order. Subscribe monthly or order one-time. No commitment.</p>
-        </div>
-        <div class="step reveal reveal-delay-2">
-            <div class="step-number">3</div>
-            <h3>Enjoy</h3>
-            <p>Tear a sachet or crack a can. Your morning just got upgraded.</p>
-        </div>
+        <div class="step reveal"><div class="step-number">1</div><h3>Pick your format</h3><p>Sachets for hot coffee, cans for cold brew. Mix and match to build your perfect box.</p></div>
+        <div class="step reveal reveal-delay-1"><div class="step-number">2</div><h3>We deliver</h3><p>Free shipping on every order. Subscribe monthly or order one-time. No commitment.</p></div>
+        <div class="step reveal reveal-delay-2"><div class="step-number">3</div><h3>Enjoy</h3><p>Tear a sachet or crack a can. Your morning just got upgraded.</p></div>
     </div>
 </section>
 
 <!-- NUMBERS -->
 <div class="numbers reveal">
     <div class="numbers-grid">
-        <div class="number-item">
-            <div class="num">12k+</div>
-            <div class="num-label">Waitlist signups</div>
-        </div>
-        <div class="number-item">
-            <div class="num">4.9</div>
-            <div class="num-label">Avg. taster rating</div>
-        </div>
-        <div class="number-item">
-            <div class="num">30s</div>
-            <div class="num-label">From sachet to sip</div>
-        </div>
-        <div class="number-item">
-            <div class="num">0g</div>
-            <div class="num-label">Added sugar</div>
-        </div>
+        <div class="number-item"><div class="num">12k+</div><div class="num-label">Waitlist signups</div></div>
+        <div class="number-item"><div class="num">4.9</div><div class="num-label">Avg. taster rating</div></div>
+        <div class="number-item"><div class="num">30s</div><div class="num-label">From sachet to sip</div></div>
+        <div class="number-item"><div class="num">0g</div><div class="num-label">Added sugar</div></div>
     </div>
 </div>
 
 <!-- TESTIMONIALS -->
 <section id="reviews">
-    <div class="section-header reveal">
-        <p class="section-label">Early Reviews</p>
-        <h2>People are talking.</h2>
-    </div>
+    <div class="section-header reveal"><p class="section-label">Early Reviews</p><h2>People are talking.</h2></div>
     <div class="testimonials-grid">
-        <div class="testimonial reveal">
-            <div class="stars">
-                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-            </div>
-            <blockquote>"I threw out my Nespresso machine. These sachets are genuinely better and I don't have to deal with pods anymore."</blockquote>
-            <div class="testimonial-footer">
-                <div class="testimonial-avatar">S</div>
-                <div class="testimonial-info">
-                    <div class="testimonial-author">Sarah M.</div>
-                    <div class="testimonial-handle">Early access tester</div>
-                </div>
-            </div>
-        </div>
-        <div class="testimonial reveal reveal-delay-1">
-            <div class="stars">
-                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-            </div>
-            <blockquote>"The cold brew cans are dangerously good. Smooth, not bitter, and the can design is so clean I keep them on my desk."</blockquote>
-            <div class="testimonial-footer">
-                <div class="testimonial-avatar">J</div>
-                <div class="testimonial-info">
-                    <div class="testimonial-author">James K.</div>
-                    <div class="testimonial-handle">Early access tester</div>
-                </div>
-            </div>
-        </div>
-        <div class="testimonial reveal reveal-delay-2">
-            <div class="stars">
-                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-            </div>
-            <blockquote>"Finally, instant coffee that doesn't taste like instant coffee. The oat latte sachet is my daily non-negotiable now."</blockquote>
-            <div class="testimonial-footer">
-                <div class="testimonial-avatar">P</div>
-                <div class="testimonial-info">
-                    <div class="testimonial-author">Priya R.</div>
-                    <div class="testimonial-handle">Early access tester</div>
-                </div>
-            </div>
-        </div>
+        <div class="testimonial reveal"><div class="stars"><div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div></div><blockquote>"I threw out my Nespresso machine. These sachets are genuinely better and I don't have to deal with pods anymore."</blockquote><div class="testimonial-footer"><div class="testimonial-avatar">S</div><div class="testimonial-info"><div class="testimonial-author">Sarah M.</div><div class="testimonial-handle">Early access tester</div></div></div></div>
+        <div class="testimonial reveal reveal-delay-1"><div class="stars"><div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div></div><blockquote>"The cold brew cans are dangerously good. Smooth, not bitter, and the can design is so clean I keep them on my desk."</blockquote><div class="testimonial-footer"><div class="testimonial-avatar">J</div><div class="testimonial-info"><div class="testimonial-author">James K.</div><div class="testimonial-handle">Early access tester</div></div></div></div>
+        <div class="testimonial reveal reveal-delay-2"><div class="stars"><div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div></div><blockquote>"Finally, instant coffee that doesn't taste like instant coffee. The oat latte sachet is my daily non-negotiable now."</blockquote><div class="testimonial-footer"><div class="testimonial-avatar">P</div><div class="testimonial-info"><div class="testimonial-author">Priya R.</div><div class="testimonial-handle">Early access tester</div></div></div></div>
     </div>
 </section>
 
@@ -809,219 +552,84 @@
             <button class="modal-close" onclick="closePreorder()">&times;</button>
         </div>
         <div class="modal-body" id="modalBody">
-            <!-- STEP 1: Product Selection -->
             <div id="orderStep1">
                 <p class="order-section-label">Sachets — Box of 12</p>
-                <div class="order-product" data-id="sachet-original" data-price="18" data-name="Original Black Sachets (12)">
-                    <div class="order-product-info">
-                        <div class="order-product-swatch swatch-dark">MS</div>
-                        <div><div class="order-product-name">Original Black</div><div class="order-product-price">$18.00 / box</div></div>
-                    </div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="changeQty(this,-1)">-</button>
-                        <input class="qty-val" type="text" value="0" readonly>
-                        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
-                    </div>
-                </div>
-                <div class="order-product" data-id="sachet-oat" data-price="20" data-name="Oat Latte Sachets (12)">
-                    <div class="order-product-info">
-                        <div class="order-product-swatch swatch-oat">MS</div>
-                        <div><div class="order-product-name">Oat Latte</div><div class="order-product-price">$20.00 / box</div></div>
-                    </div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="changeQty(this,-1)">-</button>
-                        <input class="qty-val" type="text" value="0" readonly>
-                        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
-                    </div>
-                </div>
-                <div class="order-product" data-id="sachet-vanilla" data-price="20" data-name="Vanilla Sachets (12)">
-                    <div class="order-product-info">
-                        <div class="order-product-swatch swatch-vanilla">MS</div>
-                        <div><div class="order-product-name">Vanilla</div><div class="order-product-price">$20.00 / box</div></div>
-                    </div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="changeQty(this,-1)">-</button>
-                        <input class="qty-val" type="text" value="0" readonly>
-                        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
-                    </div>
-                </div>
-                <div class="order-product" data-id="sachet-caramel" data-price="20" data-name="Salted Caramel Sachets (12)">
-                    <div class="order-product-info">
-                        <div class="order-product-swatch swatch-caramel">MS</div>
-                        <div><div class="order-product-name">Salted Caramel</div><div class="order-product-price">$20.00 / box</div></div>
-                    </div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="changeQty(this,-1)">-</button>
-                        <input class="qty-val" type="text" value="0" readonly>
-                        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
-                    </div>
-                </div>
-
+                <div class="order-product" data-id="sachet-original" data-price="18" data-name="Original Black Sachets (12)"><div class="order-product-info"><div class="order-product-swatch swatch-dark">MS</div><div><div class="order-product-name">Original Black</div><div class="order-product-price">$18.00 / box</div></div></div><div class="qty-control"><button class="qty-btn" onclick="changeQty(this,-1)">-</button><input class="qty-val" type="text" value="0" readonly><button class="qty-btn" onclick="changeQty(this,1)">+</button></div></div>
+                <div class="order-product" data-id="sachet-oat" data-price="20" data-name="Oat Latte Sachets (12)"><div class="order-product-info"><div class="order-product-swatch swatch-oat">MS</div><div><div class="order-product-name">Oat Latte</div><div class="order-product-price">$20.00 / box</div></div></div><div class="qty-control"><button class="qty-btn" onclick="changeQty(this,-1)">-</button><input class="qty-val" type="text" value="0" readonly><button class="qty-btn" onclick="changeQty(this,1)">+</button></div></div>
+                <div class="order-product" data-id="sachet-vanilla" data-price="20" data-name="Vanilla Sachets (12)"><div class="order-product-info"><div class="order-product-swatch swatch-vanilla">MS</div><div><div class="order-product-name">Vanilla</div><div class="order-product-price">$20.00 / box</div></div></div><div class="qty-control"><button class="qty-btn" onclick="changeQty(this,-1)">-</button><input class="qty-val" type="text" value="0" readonly><button class="qty-btn" onclick="changeQty(this,1)">+</button></div></div>
+                <div class="order-product" data-id="sachet-caramel" data-price="20" data-name="Salted Caramel Sachets (12)"><div class="order-product-info"><div class="order-product-swatch swatch-caramel">MS</div><div><div class="order-product-name">Salted Caramel</div><div class="order-product-price">$20.00 / box</div></div></div><div class="qty-control"><button class="qty-btn" onclick="changeQty(this,-1)">-</button><input class="qty-val" type="text" value="0" readonly><button class="qty-btn" onclick="changeQty(this,1)">+</button></div></div>
                 <p class="order-section-label">Cold Brew Cans — Pack of 6</p>
-                <div class="order-product" data-id="can-black" data-price="24" data-name="Black Cold Brew Cans (6)">
-                    <div class="order-product-info">
-                        <div class="order-product-swatch swatch-black-can">MS</div>
-                        <div><div class="order-product-name">Black Cold Brew</div><div class="order-product-price">$24.00 / pack</div></div>
-                    </div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="changeQty(this,-1)">-</button>
-                        <input class="qty-val" type="text" value="0" readonly>
-                        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
-                    </div>
-                </div>
-                <div class="order-product" data-id="can-oat" data-price="26" data-name="Oat Milk Latte Cans (6)">
-                    <div class="order-product-info">
-                        <div class="order-product-swatch swatch-oat-can">MS</div>
-                        <div><div class="order-product-name">Oat Milk Latte</div><div class="order-product-price">$26.00 / pack</div></div>
-                    </div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="changeQty(this,-1)">-</button>
-                        <input class="qty-val" type="text" value="0" readonly>
-                        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
-                    </div>
-                </div>
-                <div class="order-product" data-id="can-mocha" data-price="26" data-name="Mocha Cans (6)">
-                    <div class="order-product-info">
-                        <div class="order-product-swatch swatch-mocha">MS</div>
-                        <div><div class="order-product-name">Mocha</div><div class="order-product-price">$26.00 / pack</div></div>
-                    </div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="changeQty(this,-1)">-</button>
-                        <input class="qty-val" type="text" value="0" readonly>
-                        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
-                    </div>
-                </div>
-
-                <div class="order-summary" id="orderSummary" style="display:none">
-                    <div id="summaryLines"></div>
-                    <div class="order-summary-total">
-                        <span>Total</span>
-                        <span id="summaryTotal">$0.00</span>
-                    </div>
-                </div>
+                <div class="order-product" data-id="can-black" data-price="24" data-name="Black Cold Brew Cans (6)"><div class="order-product-info"><div class="order-product-swatch swatch-black-can">MS</div><div><div class="order-product-name">Black Cold Brew</div><div class="order-product-price">$24.00 / pack</div></div></div><div class="qty-control"><button class="qty-btn" onclick="changeQty(this,-1)">-</button><input class="qty-val" type="text" value="0" readonly><button class="qty-btn" onclick="changeQty(this,1)">+</button></div></div>
+                <div class="order-product" data-id="can-oat" data-price="26" data-name="Oat Milk Latte Cans (6)"><div class="order-product-info"><div class="order-product-swatch swatch-oat-can">MS</div><div><div class="order-product-name">Oat Milk Latte</div><div class="order-product-price">$26.00 / pack</div></div></div><div class="qty-control"><button class="qty-btn" onclick="changeQty(this,-1)">-</button><input class="qty-val" type="text" value="0" readonly><button class="qty-btn" onclick="changeQty(this,1)">+</button></div></div>
+                <div class="order-product" data-id="can-mocha" data-price="26" data-name="Mocha Cans (6)"><div class="order-product-info"><div class="order-product-swatch swatch-mocha">MS</div><div><div class="order-product-name">Mocha</div><div class="order-product-price">$26.00 / pack</div></div></div><div class="qty-control"><button class="qty-btn" onclick="changeQty(this,-1)">-</button><input class="qty-val" type="text" value="0" readonly><button class="qty-btn" onclick="changeQty(this,1)">+</button></div></div>
+                <div class="order-summary" id="orderSummary" style="display:none"><div id="summaryLines"></div><div class="order-summary-total"><span>Total</span><span id="summaryTotal">$0.00</span></div></div>
                 <button class="btn-order" id="btnNext" onclick="goToStep2()" disabled>Continue to Details</button>
             </div>
-
-            <!-- STEP 2: Customer Info -->
             <div id="orderStep2" style="display:none">
+                <button class="btn-back" onclick="backToStep1()">&#8592; Back to products</button>
                 <form id="customerForm" onsubmit="submitOrder(event)">
                     <p class="order-section-label">Your Information</p>
-                    <div class="form-row">
-                        <div class="form-field">
-                            <label>First Name *</label>
-                            <input type="text" id="custFirst" required>
-                        </div>
-                        <div class="form-field">
-                            <label>Last Name *</label>
-                            <input type="text" id="custLast" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-field">
-                            <label>Email *</label>
-                            <input type="email" id="custEmail" required>
-                        </div>
-                        <div class="form-field">
-                            <label>Phone *</label>
-                            <input type="tel" id="custPhone" required>
-                        </div>
-                    </div>
+                    <div class="form-row"><div class="form-field"><label>First Name *</label><input type="text" id="custFirst" required maxlength="50"></div><div class="form-field"><label>Last Name *</label><input type="text" id="custLast" required maxlength="50"></div></div>
+                    <div class="form-row"><div class="form-field"><label>Email *</label><input type="email" id="custEmail" required maxlength="100"></div><div class="form-field"><label>Phone *</label><input type="tel" id="custPhone" required maxlength="20" pattern="[0-9+\-\s\(\)]{7,20}"></div></div>
                     <p class="order-section-label">Shipping Address</p>
-                    <div class="form-row full">
-                        <div class="form-field">
-                            <label>Street Address *</label>
-                            <input type="text" id="custAddress" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-field">
-                            <label>City *</label>
-                            <input type="text" id="custCity" required>
-                        </div>
-                        <div class="form-field">
-                            <label>State / Province *</label>
-                            <input type="text" id="custState" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-field">
-                            <label>ZIP / Postal Code *</label>
-                            <input type="text" id="custZip" required>
-                        </div>
-                        <div class="form-field">
-                            <label>Country *</label>
-                            <input type="text" id="custCountry" value="United States" required>
-                        </div>
-                    </div>
+                    <div class="form-row full"><div class="form-field"><label>Street Address *</label><input type="text" id="custAddress" required maxlength="200"></div></div>
+                    <div class="form-row"><div class="form-field"><label>City *</label><input type="text" id="custCity" required maxlength="100"></div><div class="form-field"><label>State / Province *</label><input type="text" id="custState" required maxlength="100"></div></div>
+                    <div class="form-row"><div class="form-field"><label>ZIP / Postal Code *</label><input type="text" id="custZip" required maxlength="20"></div><div class="form-field"><label>Country *</label><input type="text" id="custCountry" value="United States" required maxlength="100"></div></div>
                     <p class="order-section-label">Notes (optional)</p>
-                    <div class="form-row full">
-                        <div class="form-field">
-                            <textarea id="custNotes" placeholder="Any special requests..."></textarea>
-                        </div>
-                    </div>
-
+                    <div class="form-row full"><div class="form-field"><textarea id="custNotes" placeholder="Any special requests..." maxlength="500"></textarea></div></div>
                     <div class="order-summary" id="orderSummary2"></div>
-                    <button class="btn-order" type="submit">Place Pre-Order</button>
+                    <button class="btn-order" type="submit" id="btnSubmitOrder">Place Pre-Order</button>
                 </form>
             </div>
-
-            <!-- STEP 3: Confirmation -->
             <div id="orderStep3" style="display:none">
-                <div class="order-success">
-                    <div class="order-success-icon">
-                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                    </div>
-                    <h3>Pre-Order Confirmed!</h3>
-                    <p>Thank you for your order. We'll reach out via email with updates on shipping and your early access perks.</p>
-                    <div class="order-id" id="confirmOrderId"></div>
-                </div>
+                <div class="order-success"><div class="order-success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><h3>Pre-Order Confirmed!</h3><p>Thank you for your order. We'll reach out via email with updates on shipping and your early access perks.</p><div class="order-id" id="confirmOrderId"></div></div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- ADMIN DASHBOARD (access via ?admin) -->
+<!-- ADMIN DASHBOARD -->
 <div class="admin-page" id="adminPage">
-    <!-- Login gate -->
     <div class="admin-login" id="adminLogin">
         <h2>Admin Access</h2>
-        <p>Enter your admin password to view orders.</p>
+        <p>Sign in with your admin email to view orders.</p>
+        <input type="email" id="adminEmail" placeholder="Admin email">
         <input type="password" id="adminPass" placeholder="Password" onkeydown="if(event.key==='Enter')adminAuth()">
-        <button class="btn-order" onclick="adminAuth()">Log In</button>
-        <p class="admin-login-error" id="adminError">Incorrect password. Try again.</p>
+        <button class="btn-order" onclick="adminAuth()" id="btnAdminLogin">Log In</button>
+        <p class="admin-login-error" id="adminError"></p>
     </div>
-
-    <!-- Dashboard (hidden until auth) -->
     <div id="adminDashboard" style="display:none">
         <div class="admin-header">
-            <h1>Orders Dashboard</h1>
+            <div><h1>Orders Dashboard</h1><span class="admin-realtime"><span class="live-dot"></span> Real-time via Firebase</span></div>
             <div class="admin-actions">
                 <button class="btn-admin" onclick="exportCSV()">Export CSV</button>
-                <button class="btn-admin" onclick="clearOrders()">Clear All</button>
+                <button class="btn-admin" onclick="adminSignOut()">Sign Out</button>
                 <button class="btn-admin primary" onclick="window.location.href=window.location.pathname">Back to Site</button>
             </div>
         </div>
         <div class="admin-stats" id="adminStats"></div>
+        <div class="admin-toolbar">
+            <input class="admin-search" id="adminSearch" placeholder="Search orders by name, email, or order ID..." oninput="renderAdmin()">
+            <select class="admin-filter" id="adminStatusFilter" onchange="renderAdmin()">
+                <option value="all">All Statuses</option>
+                <option value="pending">Pending</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="shipped">Shipped</option>
+                <option value="cancelled">Cancelled</option>
+            </select>
+        </div>
         <div class="admin-table-wrap">
             <table class="admin-table">
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Date</th>
-                        <th>Customer</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Items</th>
-                        <th>Total</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>Order ID</th><th>Date</th><th>Customer</th><th>Contact</th><th>Items</th><th>Total</th><th>Status</th><th></th></tr></thead>
                 <tbody id="adminTableBody"></tbody>
             </table>
-            <div class="admin-empty" id="adminEmpty" style="display:none">No orders yet.</div>
+            <div class="admin-empty" id="adminEmpty" style="display:none">No orders found.</div>
         </div>
     </div>
 </div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
 <!-- FOOTER -->
 <footer>
@@ -1043,29 +651,80 @@
     </div>
 </footer>
 
+<!-- ============ FIREBASE SDK ============ -->
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+
 <script>
+// =======================================================================
+// FIREBASE CONFIG — Replace with your project's config
+// =======================================================================
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
+
+// ============ HELPERS ============
+function esc(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+}
+
+function showToast(msg, isError) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show' + (isError ? ' error' : '');
+    setTimeout(() => t.className = 'toast', 3000);
+}
+
+function genOrderId() {
+    return 'MS-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substring(2,5).toUpperCase();
+}
+
+// Rate limiting: max 5 orders per hour per browser
+function checkRateLimit() {
+    const key = 'ms_order_times';
+    const now = Date.now();
+    let times = JSON.parse(localStorage.getItem(key) || '[]');
+    times = times.filter(t => now - t < 3600000);
+    if (times.length >= 5) return false;
+    times.push(now);
+    localStorage.setItem(key, JSON.stringify(times));
+    return true;
+}
+
 // ============ SCROLL REVEAL ============
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-        }
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
     });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// ============ WAITLIST FORM ============
-document.getElementById('waitlistForm').addEventListener('submit', function(e) {
+// ============ WAITLIST (Firebase) ============
+document.getElementById('waitlistForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const email = this.querySelector('input[type="email"]').value;
-    const waitlist = JSON.parse(localStorage.getItem('ms_waitlist') || '[]');
-    waitlist.push({ email, date: new Date().toISOString() });
-    localStorage.setItem('ms_waitlist', JSON.stringify(waitlist));
-    this.style.display = 'none';
-    document.getElementById('successMsg').style.display = 'block';
-    document.querySelector('.form-note').style.display = 'none';
-    document.querySelector('.waitlist-perks').style.display = 'none';
+    const emailInput = this.querySelector('input[type="email"]');
+    const email = emailInput.value.trim();
+    try {
+        await db.collection('waitlist').add({ email, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+        this.style.display = 'none';
+        document.getElementById('successMsg').style.display = 'block';
+        document.querySelector('.form-note').style.display = 'none';
+        document.querySelector('.waitlist-perks').style.display = 'none';
+    } catch (err) {
+        showToast('Could not join waitlist. Please try again.', true);
+    }
 });
 
 // ============ SMOOTH SCROLL ============
@@ -1086,7 +745,7 @@ window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
             const showcase = document.querySelector('.hero-showcase');
             if (showcase && scrolled < window.innerHeight) {
-                showcase.style.transform = `translateY(${scrolled * 0.15}px)`;
+                showcase.style.transform = 'translateY(' + (scrolled * 0.15) + 'px)';
                 showcase.style.opacity = Math.max(0, 1 - scrolled / (window.innerHeight * 0.7));
             }
             ticking = false;
@@ -1095,21 +754,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// ============ PRE-ORDER SYSTEM ============
-const ORDERS_KEY = 'ms_orders';
-const ADMIN_PASS = 'morningstandard2026';
-
-function getOrders() {
-    return JSON.parse(localStorage.getItem(ORDERS_KEY) || '[]');
-}
-function saveOrders(orders) {
-    localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
-}
-function genOrderId() {
-    return 'MS-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substring(2,5).toUpperCase();
-}
-
-// Open / close modal
+// ============ PRE-ORDER MODAL ============
 function openPreorder() {
     document.getElementById('preorderModal').classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -1122,6 +767,9 @@ function closePreorder() {
 document.getElementById('preorderModal').addEventListener('click', function(e) {
     if (e.target === this) closePreorder();
 });
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closePreorder();
+});
 
 function resetOrderModal() {
     document.getElementById('orderStep1').style.display = '';
@@ -1129,10 +777,11 @@ function resetOrderModal() {
     document.getElementById('orderStep3').style.display = 'none';
     document.getElementById('modalTitle').textContent = 'Pre-Order';
     document.querySelectorAll('.qty-val').forEach(i => i.value = '0');
+    document.getElementById('btnSubmitOrder').disabled = false;
+    document.getElementById('btnSubmitOrder').innerHTML = 'Place Pre-Order';
     updateSummary();
 }
 
-// Quantity controls
 function changeQty(btn, delta) {
     const input = btn.parentElement.querySelector('.qty-val');
     let val = parseInt(input.value) + delta;
@@ -1147,13 +796,7 @@ function getCartItems() {
     document.querySelectorAll('#orderStep1 .order-product').forEach(row => {
         const qty = parseInt(row.querySelector('.qty-val').value);
         if (qty > 0) {
-            items.push({
-                id: row.dataset.id,
-                name: row.dataset.name,
-                price: parseFloat(row.dataset.price),
-                qty: qty,
-                subtotal: qty * parseFloat(row.dataset.price)
-            });
+            items.push({ id: row.dataset.id, name: row.dataset.name, price: parseFloat(row.dataset.price), qty, subtotal: qty * parseFloat(row.dataset.price) });
         }
     });
     return items;
@@ -1165,208 +808,229 @@ function updateSummary() {
     const linesDiv = document.getElementById('summaryLines');
     const totalSpan = document.getElementById('summaryTotal');
     const btnNext = document.getElementById('btnNext');
-
-    if (items.length === 0) {
-        summaryDiv.style.display = 'none';
-        btnNext.disabled = true;
-        return;
-    }
-
+    if (items.length === 0) { summaryDiv.style.display = 'none'; btnNext.disabled = true; return; }
     summaryDiv.style.display = '';
     btnNext.disabled = false;
-    let html = '';
-    let total = 0;
-    items.forEach(item => {
-        html += '<div class="order-summary-row"><span>' + item.name + ' x' + item.qty + '</span><span>$' + item.subtotal.toFixed(2) + '</span></div>';
-        total += item.subtotal;
-    });
+    let html = '', total = 0;
+    items.forEach(item => { html += '<div class="order-summary-row"><span>' + esc(item.name) + ' x' + item.qty + '</span><span>$' + item.subtotal.toFixed(2) + '</span></div>'; total += item.subtotal; });
     linesDiv.innerHTML = html;
     totalSpan.textContent = '$' + total.toFixed(2);
 }
 
 function goToStep2() {
-    const items = getCartItems();
-    if (items.length === 0) return;
-
+    if (getCartItems().length === 0) return;
     document.getElementById('orderStep1').style.display = 'none';
     document.getElementById('orderStep2').style.display = '';
     document.getElementById('modalTitle').textContent = 'Your Details';
-
-    // Copy summary to step 2
-    let total = 0;
-    let html = '';
-    items.forEach(item => {
-        html += '<div class="order-summary-row"><span>' + item.name + ' x' + item.qty + '</span><span>$' + item.subtotal.toFixed(2) + '</span></div>';
-        total += item.subtotal;
-    });
+    const items = getCartItems();
+    let total = 0, html = '';
+    items.forEach(i => { html += '<div class="order-summary-row"><span>' + esc(i.name) + ' x' + i.qty + '</span><span>$' + i.subtotal.toFixed(2) + '</span></div>'; total += i.subtotal; });
     html += '<div class="order-summary-total"><span>Total</span><span>$' + total.toFixed(2) + '</span></div>';
     document.getElementById('orderSummary2').innerHTML = html;
 }
 
-function submitOrder(e) {
+function backToStep1() {
+    document.getElementById('orderStep2').style.display = 'none';
+    document.getElementById('orderStep1').style.display = '';
+    document.getElementById('modalTitle').textContent = 'Pre-Order';
+}
+
+async function submitOrder(e) {
     e.preventDefault();
+    const btn = document.getElementById('btnSubmitOrder');
+
+    // Rate limit
+    if (!checkRateLimit()) { showToast('Too many orders. Please try again later.', true); return; }
+
+    // Validate
     const items = getCartItems();
+    if (items.length === 0) return;
     let total = 0;
     items.forEach(i => total += i.subtotal);
 
-    const order = {
-        id: genOrderId(),
-        date: new Date().toISOString(),
-        customer: {
-            firstName: document.getElementById('custFirst').value.trim(),
-            lastName: document.getElementById('custLast').value.trim(),
-            email: document.getElementById('custEmail').value.trim(),
-            phone: document.getElementById('custPhone').value.trim(),
-            address: document.getElementById('custAddress').value.trim(),
-            city: document.getElementById('custCity').value.trim(),
-            state: document.getElementById('custState').value.trim(),
-            zip: document.getElementById('custZip').value.trim(),
-            country: document.getElementById('custCountry').value.trim()
-        },
-        notes: document.getElementById('custNotes').value.trim(),
-        items: items,
-        total: total,
-        status: 'pending'
+    // Sanitize inputs
+    const customer = {
+        firstName: esc(document.getElementById('custFirst').value.trim()),
+        lastName: esc(document.getElementById('custLast').value.trim()),
+        email: document.getElementById('custEmail').value.trim().toLowerCase(),
+        phone: document.getElementById('custPhone').value.trim().replace(/[^0-9+\-\s()]/g, ''),
+        address: esc(document.getElementById('custAddress').value.trim()),
+        city: esc(document.getElementById('custCity').value.trim()),
+        state: esc(document.getElementById('custState').value.trim()),
+        zip: esc(document.getElementById('custZip').value.trim()),
+        country: esc(document.getElementById('custCountry').value.trim())
     };
 
-    const orders = getOrders();
-    orders.unshift(order);
-    saveOrders(orders);
+    // Email format validation
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customer.email)) { showToast('Please enter a valid email.', true); return; }
 
-    // Show confirmation
-    document.getElementById('orderStep2').style.display = 'none';
-    document.getElementById('orderStep3').style.display = '';
-    document.getElementById('modalTitle').textContent = 'Order Placed';
-    document.getElementById('confirmOrderId').textContent = order.id;
+    const orderId = genOrderId();
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Placing Order...';
 
-    // Reset the form for next use
-    document.getElementById('customerForm').reset();
-    document.getElementById('custCountry').value = 'United States';
+    try {
+        await db.collection('orders').doc(orderId).set({
+            id: orderId,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            customer,
+            notes: esc(document.getElementById('custNotes').value.trim()).substring(0, 500),
+            items: items.map(i => ({ id: i.id, name: i.name, price: i.price, qty: i.qty, subtotal: i.subtotal })),
+            total,
+            status: 'pending'
+        });
+
+        document.getElementById('orderStep2').style.display = 'none';
+        document.getElementById('orderStep3').style.display = '';
+        document.getElementById('modalTitle').textContent = 'Order Placed';
+        document.getElementById('confirmOrderId').textContent = orderId;
+        document.getElementById('customerForm').reset();
+        document.getElementById('custCountry').value = 'United States';
+        showToast('Order placed successfully!');
+    } catch (err) {
+        btn.disabled = false;
+        btn.innerHTML = 'Place Pre-Order';
+        showToast('Failed to place order. Please try again.', true);
+        console.error('Order error:', err);
+    }
 }
 
 // ============ ADMIN DASHBOARD ============
-function checkAdmin() {
-    const params = new URLSearchParams(window.location.search);
-    if (params.has('admin')) {
-        // Hide main site, show admin
-        document.querySelectorAll('nav, .hero, .marquee-section, #products, #why, .big-quote, #how, .numbers, #reviews, #waitlist, footer').forEach(el => {
-            el.style.display = 'none';
-        });
-        document.getElementById('adminPage').classList.add('active');
+let allOrders = [];
+let unsubOrders = null;
 
-        // Check if already authed this session
-        if (sessionStorage.getItem('ms_admin_auth') === '1') {
-            showDashboard();
-        }
+function checkAdmin() {
+    if (new URLSearchParams(window.location.search).has('admin')) {
+        document.querySelectorAll('nav,.hero,.marquee-section,#products,#why,.big-quote,#how,.numbers,#reviews,#waitlist,footer').forEach(el => el.style.display = 'none');
+        document.getElementById('adminPage').classList.add('active');
+        // Check existing auth
+        auth.onAuthStateChanged(user => {
+            if (user) showDashboard();
+        });
     }
 }
 
-function adminAuth() {
+async function adminAuth() {
+    const email = document.getElementById('adminEmail').value.trim();
     const pass = document.getElementById('adminPass').value;
-    if (pass === ADMIN_PASS) {
-        sessionStorage.setItem('ms_admin_auth', '1');
+    const btn = document.getElementById('btnAdminLogin');
+    const err = document.getElementById('adminError');
+    err.style.display = 'none';
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Signing in...';
+    try {
+        await auth.signInWithEmailAndPassword(email, pass);
         showDashboard();
-    } else {
-        document.getElementById('adminError').style.display = 'block';
+    } catch (e) {
+        err.textContent = e.code === 'auth/invalid-credential' ? 'Invalid email or password.' : e.message;
+        err.style.display = 'block';
+        btn.disabled = false;
+        btn.innerHTML = 'Log In';
     }
+}
+
+function adminSignOut() {
+    if (unsubOrders) unsubOrders();
+    auth.signOut();
+    document.getElementById('adminLogin').style.display = '';
+    document.getElementById('adminDashboard').style.display = 'none';
+    document.getElementById('adminEmail').value = '';
+    document.getElementById('adminPass').value = '';
+    document.getElementById('btnAdminLogin').disabled = false;
+    document.getElementById('btnAdminLogin').innerHTML = 'Log In';
 }
 
 function showDashboard() {
     document.getElementById('adminLogin').style.display = 'none';
     document.getElementById('adminDashboard').style.display = '';
-    renderAdmin();
+    // Real-time listener
+    unsubOrders = db.collection('orders').orderBy('createdAt', 'desc').onSnapshot(snapshot => {
+        allOrders = snapshot.docs.map(doc => doc.data());
+        renderAdmin();
+    }, err => {
+        console.error('Firestore listen error:', err);
+        showToast('Error loading orders.', true);
+    });
 }
 
 function renderAdmin() {
-    const orders = getOrders();
-    const tbody = document.getElementById('adminTableBody');
-    const statsDiv = document.getElementById('adminStats');
-    const emptyDiv = document.getElementById('adminEmpty');
+    const search = (document.getElementById('adminSearch').value || '').toLowerCase();
+    const statusFilter = document.getElementById('adminStatusFilter').value;
+    let orders = allOrders;
+    if (statusFilter !== 'all') orders = orders.filter(o => o.status === statusFilter);
+    if (search) orders = orders.filter(o => {
+        const hay = (o.id + ' ' + o.customer.firstName + ' ' + o.customer.lastName + ' ' + o.customer.email).toLowerCase();
+        return hay.includes(search);
+    });
 
-    // Stats
-    const totalOrders = orders.length;
-    const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0);
-    const totalItems = orders.reduce((sum, o) => sum + o.items.reduce((s, i) => s + i.qty, 0), 0);
+    // Stats (always from all orders)
+    const totalOrders = allOrders.length;
+    const totalRevenue = allOrders.reduce((s, o) => s + o.total, 0);
+    const totalItems = allOrders.reduce((s, o) => s + o.items.reduce((a, i) => a + i.qty, 0), 0);
     const avgOrder = totalOrders > 0 ? totalRevenue / totalOrders : 0;
-
-    statsDiv.innerHTML =
+    document.getElementById('adminStats').innerHTML =
         '<div class="admin-stat"><div class="stat-val">' + totalOrders + '</div><div class="stat-label">Total Orders</div></div>' +
         '<div class="admin-stat"><div class="stat-val gold">$' + totalRevenue.toFixed(2) + '</div><div class="stat-label">Total Revenue</div></div>' +
         '<div class="admin-stat"><div class="stat-val">' + totalItems + '</div><div class="stat-label">Items Ordered</div></div>' +
         '<div class="admin-stat"><div class="stat-val">$' + avgOrder.toFixed(2) + '</div><div class="stat-label">Avg. Order Value</div></div>';
 
-    if (orders.length === 0) {
-        tbody.innerHTML = '';
-        emptyDiv.style.display = '';
-        return;
-    }
-    emptyDiv.style.display = 'none';
+    const tbody = document.getElementById('adminTableBody');
+    if (orders.length === 0) { tbody.innerHTML = ''; document.getElementById('adminEmpty').style.display = ''; return; }
+    document.getElementById('adminEmpty').style.display = 'none';
 
     let html = '';
-    orders.forEach(order => {
-        const date = new Date(order.date);
-        const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        const timeStr = date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-        const itemsHtml = order.items.map(i => i.name + ' x' + i.qty).join('<br>');
-        const statusClass = order.status === 'confirmed' ? 'confirmed' : 'pending';
+    orders.forEach(o => {
+        const date = o.createdAt ? o.createdAt.toDate() : new Date();
+        const dateStr = date.toLocaleDateString('en-US', { month:'short',day:'numeric',year:'numeric' });
+        const timeStr = date.toLocaleTimeString('en-US', { hour:'2-digit',minute:'2-digit' });
+        const itemsHtml = o.items.map(i => esc(i.name) + ' x' + i.qty).join('<br>');
+        const addr = esc(o.customer.city) + ', ' + esc(o.customer.state) + ' ' + esc(o.customer.zip);
+        const nextStatus = { pending:'confirmed', confirmed:'shipped', shipped:'cancelled', cancelled:'pending' };
 
         html += '<tr>' +
-            '<td><strong>' + order.id + '</strong></td>' +
+            '<td><strong>' + esc(o.id) + '</strong></td>' +
             '<td>' + dateStr + '<br><span style="color:var(--text-tertiary);font-size:12px">' + timeStr + '</span></td>' +
-            '<td>' + order.customer.firstName + ' ' + order.customer.lastName + '<br><span style="color:var(--text-tertiary);font-size:12px">' + order.customer.city + ', ' + order.customer.state + '</span></td>' +
-            '<td>' + order.customer.email + '</td>' +
-            '<td>' + order.customer.phone + '</td>' +
+            '<td>' + esc(o.customer.firstName) + ' ' + esc(o.customer.lastName) + '<div class="order-address">' + addr + '</div></td>' +
+            '<td>' + esc(o.customer.email) + '<br><span style="color:var(--text-tertiary);font-size:12px">' + esc(o.customer.phone) + '</span></td>' +
             '<td><div class="order-items-list">' + itemsHtml + '</div></td>' +
-            '<td><strong>$' + order.total.toFixed(2) + '</strong></td>' +
-            '<td><span class="order-status ' + statusClass + '">' + order.status + '</span></td>' +
+            '<td><strong>$' + o.total.toFixed(2) + '</strong></td>' +
+            '<td><button class="order-status ' + o.status + '" onclick="cycleStatus(\'' + o.id + '\',\'' + nextStatus[o.status] + '\')" title="Click to change">' + o.status + '</button></td>' +
+            '<td><button class="order-delete" onclick="deleteOrder(\'' + o.id + '\')" title="Delete order">&#x2715;</button></td>' +
         '</tr>';
     });
     tbody.innerHTML = html;
 }
 
+async function cycleStatus(orderId, newStatus) {
+    try {
+        await db.collection('orders').doc(orderId).update({ status: newStatus });
+    } catch (err) { showToast('Failed to update status.', true); }
+}
+
+async function deleteOrder(orderId) {
+    if (!confirm('Delete order ' + orderId + '? This cannot be undone.')) return;
+    try {
+        await db.collection('orders').doc(orderId).delete();
+        showToast('Order deleted.');
+    } catch (err) { showToast('Failed to delete order.', true); }
+}
+
 function exportCSV() {
-    const orders = getOrders();
-    if (orders.length === 0) return alert('No orders to export.');
-
+    if (allOrders.length === 0) return showToast('No orders to export.', true);
     let csv = 'Order ID,Date,First Name,Last Name,Email,Phone,Address,City,State,ZIP,Country,Items,Total,Status,Notes\n';
-    orders.forEach(o => {
+    allOrders.forEach(o => {
+        const date = o.createdAt ? o.createdAt.toDate().toLocaleString() : '';
         const items = o.items.map(i => i.name + ' x' + i.qty).join('; ');
-        csv += [
-            o.id,
-            new Date(o.date).toLocaleString(),
-            '"' + o.customer.firstName + '"',
-            '"' + o.customer.lastName + '"',
-            o.customer.email,
-            o.customer.phone,
-            '"' + o.customer.address + '"',
-            '"' + o.customer.city + '"',
-            '"' + o.customer.state + '"',
-            o.customer.zip,
-            '"' + o.customer.country + '"',
-            '"' + items + '"',
-            '$' + o.total.toFixed(2),
-            o.status,
-            '"' + (o.notes || '') + '"'
-        ].join(',') + '\n';
+        csv += [o.id, date, '"'+o.customer.firstName+'"', '"'+o.customer.lastName+'"', o.customer.email, o.customer.phone, '"'+o.customer.address+'"', '"'+o.customer.city+'"', '"'+o.customer.state+'"', o.customer.zip, '"'+o.customer.country+'"', '"'+items+'"', '$'+o.total.toFixed(2), o.status, '"'+(o.notes||'')+'"'].join(',') + '\n';
     });
-
     const blob = new Blob([csv], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url;
+    a.href = URL.createObjectURL(blob);
     a.download = 'morning-standard-orders-' + new Date().toISOString().slice(0,10) + '.csv';
     a.click();
-    URL.revokeObjectURL(url);
+    URL.revokeObjectURL(a.href);
 }
 
-function clearOrders() {
-    if (confirm('Are you sure you want to delete ALL orders? This cannot be undone.')) {
-        localStorage.removeItem(ORDERS_KEY);
-        renderAdmin();
-    }
-}
-
-// Init: check for admin mode
+// Init
 checkAdmin();
 </script>
 

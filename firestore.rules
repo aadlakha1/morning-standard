@@ -1,0 +1,44 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ORDERS: Anyone can create, only authenticated admin can read/update/delete
+    match /orders/{orderId} {
+      allow create: if
+        // Must have required fields
+        request.resource.data.keys().hasAll(['id', 'customer', 'items', 'total', 'status', 'createdAt'])
+        // Total must be positive number
+        && request.resource.data.total is number
+        && request.resource.data.total > 0
+        // Status must be 'pending' on creation
+        && request.resource.data.status == 'pending'
+        // Items must be a list with at least 1 item
+        && request.resource.data.items is list
+        && request.resource.data.items.size() > 0
+        // Customer must have required fields
+        && request.resource.data.customer.keys().hasAll(['firstName', 'lastName', 'email', 'phone', 'address', 'city', 'state', 'zip', 'country'])
+        // Prevent absurdly large orders (anti-abuse)
+        && request.resource.data.items.size() <= 20
+        // Limit total to $10,000 (anti-abuse)
+        && request.resource.data.total <= 10000;
+
+      allow read, update, delete: if request.auth != null;
+    }
+
+    // WAITLIST: Anyone can create, only authenticated admin can read
+    match /waitlist/{docId} {
+      allow create: if
+        request.resource.data.keys().hasAll(['email', 'createdAt'])
+        && request.resource.data.email is string
+        && request.resource.data.email.size() > 0
+        && request.resource.data.email.size() <= 100;
+
+      allow read: if request.auth != null;
+    }
+
+    // Deny everything else by default
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
