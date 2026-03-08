@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morning Standard — Set Your Standard</title>
+    <meta name="description" content="Premium coffee sachets and cold brew cans. Every morning. No compromise.">
+    <style>
+        :root {
+            --bg: #fafafa;
+            --bg-alt: #f5f5f7;
+            --bg-dark: #1d1d1f;
+            --text-primary: #1d1d1f;
+            --text-secondary: #6e6e73;
+            --text-tertiary: #86868b;
+            --accent: #c49b2f;
+            --accent-dark: #8b6914;
+            --accent-glow: rgba(196,155,47,0.15);
+            --cream: #f0ead6;
+            --espresso: #3c2415;
+            --mocha: #6f4e37;
+            --white: #ffffff;
+            --card-bg: #ffffff;
+            --border: #d2d2d7;
+            --shadow: 0 4px 24px rgba(0,0,0,0.06);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.10);
+            --shadow-xl: 0 32px 80px rgba(0,0,0,0.14);
+            --radius: 24px;
+            --radius-sm: 14px;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #000000;
+                --bg-alt: #111111;
+                --text-primary: #f5f5f7;
+                --text-secondary: #a1a1a6;
+                --text-tertiary: #6e6e73;
+                --card-bg: #1d1d1f;
+                --border: #333336;
+                --shadow: 0 4px 24px rgba(0,0,0,0.4);
+                --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
+                --shadow-xl: 0 32px 80px rgba(0,0,0,0.6);
+            }
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+        body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text-primary);line-height:1.5;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+
+        /* ===================== NAV ===================== */
+        nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);background:rgba(250,250,250,0.72);border-bottom:0.5px solid var(--border);transition:background 0.3s}
+        @media(prefers-color-scheme:dark){nav{background:rgba(0,0,0,0.72)}}
+        .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between}
+        .nav-logo{font-size:18px;font-weight:700;letter-spacing:-0.02em;color:var(--text-primary);text-decoration:none}
+        .nav-links{display:flex;gap:32px;list-style:none;align-items:center}
+        .nav-links a{font-size:14px;color:var(--text-secondary);text-decoration:none;transition:color 0.2s}
+        .nav-links a:hover{color:var(--text-primary)}
+        .nav-cta{background:var(--text-primary);color:var(--bg)!important;padding:8px 20px;border-radius:980px;font-size:14px;font-weight:500;transition:opacity 0.2s}
+        .nav-cta:hover{opacity:0.85}
+        .nav-menu-btn{display:none;background:none;border:none;color:var(--text-primary);font-size:24px;cursor:pointer;padding:4px}
+        @media(max-width:768px){.nav-menu-btn{display:block}.nav-links{display:none}}
+
+        /* ===================== HERO ===================== */
+        .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px 24px 100px;position:relative;overflow:hidden;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-alt) 100%)}
+
+        /* Ambient glow */
+        .hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:1000px;height:1000px;background:radial-gradient(circle,rgba(196,155,47,0.07) 0%,rgba(196,155,47,0.03) 40%,transparent 70%);border-radius:50%;pointer-events:none;animation:pulseGlow 6s ease-in-out infinite}
+        .hero::after{content:'';position:absolute;bottom:-100px;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(60,36,21,0.06) 0%,transparent 70%);pointer-events:none}
+
+        @keyframes pulseGlow{0%,100%{transform:translateX(-50%) scale(1);opacity:1}50%{transform:translateX(-50%) scale(1.1);opacity:0.7}}
+
+        /* Floating coffee beans */
+        .hero-particles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+        .particle{position:absolute;width:8px;height:12px;background:var(--mocha);border-radius:50% 50% 50% 0;opacity:0.08;animation:floatUp linear infinite}
+        .particle:nth-child(1){left:10%;animation-duration:18s;animation-delay:0s;width:6px;height:10px}
+        .particle:nth-child(2){left:25%;animation-duration:22s;animation-delay:3s;width:10px;height:14px}
+        .particle:nth-child(3){left:45%;animation-duration:20s;animation-delay:1s}
+        .particle:nth-child(4){left:65%;animation-duration:24s;animation-delay:5s;width:7px;height:11px}
+        .particle:nth-child(5){left:80%;animation-duration:19s;animation-delay:2s;width:9px;height:13px}
+        .particle:nth-child(6){left:92%;animation-duration:21s;animation-delay:4s;width:6px;height:9px}
+        @keyframes floatUp{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:0.08}90%{opacity:0.08}100%{transform:translateY(-100px) rotate(360deg);opacity:0}}
+
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--accent);background:var(--accent-glow);padding:8px 18px;border-radius:980px;margin-bottom:28px;letter-spacing:0.02em;animation:fadeUp 0.8s ease both;border:1px solid rgba(196,155,47,0.15)}
+        .hero-badge .dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:blink 2s ease-in-out infinite}
+        @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+
+        .hero h1{font-size:clamp(52px,11vw,104px);font-weight:700;letter-spacing:-0.045em;line-height:1.02;max-width:900px;animation:fadeUp 0.8s ease 0.1s both}
+        .hero h1 .accent{background:linear-gradient(135deg,var(--accent-dark),var(--accent),#d4a944);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .hero-sub{font-size:clamp(18px,2.5vw,24px);color:var(--text-secondary);max-width:540px;margin-top:20px;line-height:1.55;font-weight:400;animation:fadeUp 0.8s ease 0.2s both}
+        .hero-founder{font-size:15px;color:var(--text-tertiary);margin-top:14px;animation:fadeUp 0.8s ease 0.25s both;letter-spacing:0.01em}
+        .hero-founder strong{color:var(--accent);font-weight:600}
+        .hero-actions{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap;justify-content:center;animation:fadeUp 0.8s ease 0.3s both}
+
+        .btn-primary{background:var(--text-primary);color:var(--bg);padding:17px 36px;border-radius:980px;font-size:17px;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:transform 0.2s,opacity 0.2s,box-shadow 0.2s;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(0,0,0,0.12)}
+        .btn-primary:hover{transform:scale(1.03);box-shadow:0 8px 32px rgba(0,0,0,0.18)}
+        .btn-secondary{background:transparent;color:var(--text-primary);padding:17px 36px;border-radius:980px;font-size:17px;font-weight:600;text-decoration:none;border:1.5px solid var(--border);cursor:pointer;transition:transform 0.2s,background 0.2s}
+        .btn-secondary:hover{transform:scale(1.03);background:var(--bg-alt)}
+
+        /* ===================== HERO PRODUCT SHOWCASE ===================== */
+        .hero-showcase{margin-top:80px;display:flex;align-items:flex-end;justify-content:center;gap:28px;animation:fadeUp 1s ease 0.5s both;perspective:800px;position:relative}
+
+        /* ---- Sachet ---- */
+        .sachet{width:140px;height:192px;position:relative;transform:rotateY(-5deg) rotateX(2deg);transition:transform 0.4s ease;cursor:default}
+        .sachet:hover{transform:rotateY(0deg) rotateX(0deg) translateY(-12px)}
+        .sachet-body{width:100%;height:100%;border-radius:6px 6px 16px 16px;position:relative;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.22),0 4px 12px rgba(0,0,0,0.15),inset 0 1px 0 rgba(255,255,255,0.06)}
+
+        .sachet-body.dark{background:linear-gradient(170deg,#2a1d12 0%,#1a120a 40%,#0d0906 100%)}
+        .sachet-body.oat{background:linear-gradient(170deg,#d4c5a0 0%,#c4b48a 40%,#a89870 100%)}
+        .sachet-body.caramel{background:linear-gradient(170deg,#6b3a1f 0%,#4a2810 40%,#2d1808 100%)}
+
+        /* Foil shine effect */
+        .sachet-body::before{content:'';position:absolute;top:0;left:-50%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent);transform:skewX(-20deg);animation:sachetShine 4s ease-in-out infinite;pointer-events:none}
+        @keyframes sachetShine{0%,100%{left:-50%}50%{left:120%}}
+
+        /* Tear notch */
+        .sachet-tear{position:absolute;top:0;left:0;right:0;height:20px;display:flex;align-items:center;justify-content:center}
+        .sachet-tear::before{content:'';width:24px;height:0;border-top:2px dashed rgba(255,255,255,0.2)}
+        .sachet-tear-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:10px;height:6px;background:transparent;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid rgba(196,155,47,0.5)}
+
+        /* Sachet label content */
+        .sachet-label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 14px 20px;text-align:center}
+        .sachet-brand{font-size:7px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);opacity:0.9}
+        .sachet-line{width:32px;height:1px;background:var(--accent);opacity:0.4;margin:8px 0}
+        .sachet-flavor{font-size:16px;font-weight:700;letter-spacing:-0.02em;color:#f5f5f7;line-height:1.2}
+        .sachet-body.oat .sachet-flavor{color:#2a1d12}
+        .sachet-body.oat .sachet-brand{color:#6b5a3a}
+        .sachet-body.oat .sachet-line{background:#6b5a3a}
+        .sachet-type{font-size:8px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,245,247,0.5);margin-top:6px}
+        .sachet-body.oat .sachet-type{color:rgba(42,29,18,0.5)}
+        .sachet-weight{position:absolute;bottom:12px;font-size:7px;color:rgba(245,245,247,0.3);letter-spacing:0.05em}
+        .sachet-body.oat .sachet-weight{color:rgba(42,29,18,0.3)}
+
+        /* Gold seal on sachet */
+        .sachet-seal{position:absolute;bottom:32px;width:28px;height:28px;border-radius:50%;border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;opacity:0.5}
+        .sachet-seal::after{content:'MS';font-size:7px;font-weight:800;color:var(--accent);letter-spacing:0.05em}
+
+        /* ---- CAN ---- */
+        .can{width:96px;height:260px;position:relative;transition:transform 0.4s ease;cursor:default}
+        .can:hover{transform:translateY(-16px)}
+        .can-body{width:100%;height:100%;border-radius:12px 12px 16px 16px;position:relative;overflow:hidden;box-shadow:0 28px 72px rgba(0,0,0,0.25),0 4px 16px rgba(0,0,0,0.18)}
+
+        .can-body.black{background:linear-gradient(180deg,#1a1a1a 0%,#111 50%,#0a0a0a 100%)}
+        .can-body.oat-can{background:linear-gradient(180deg,#f0ead6 0%,#e6ddc8 50%,#d9cfb8 100%)}
+        .can-body.mocha-can{background:linear-gradient(180deg,#3c2415 0%,#2a1a0e 50%,#1a0f08 100%)}
+
+        /* Can metallic top */
+        .can-top{position:absolute;top:0;left:0;right:0;height:24px;background:linear-gradient(180deg,#c0c0c0 0%,#a0a0a0 40%,#888 100%);border-radius:12px 12px 0 0;display:flex;align-items:center;justify-content:center}
+        .can-top::before{content:'';width:50px;height:14px;border-radius:7px;border:1.5px solid rgba(0,0,0,0.2);background:linear-gradient(180deg,#b0b0b0,#909090);position:relative;top:1px}
+
+        /* Pull tab */
+        .can-tab{position:absolute;top:3px;left:50%;transform:translateX(-50%);width:20px;height:10px;border-radius:5px 5px 3px 3px;background:linear-gradient(180deg,#d0d0d0,#aaa);border:1px solid rgba(0,0,0,0.15);z-index:2}
+        .can-tab::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:6px;height:4px;border-radius:50%;border:1px solid rgba(0,0,0,0.15)}
+
+        /* Can rim at bottom */
+        .can-bottom{position:absolute;bottom:0;left:0;right:0;height:8px;background:linear-gradient(0deg,#c0c0c0,#a0a0a0);border-radius:0 0 16px 16px}
+
+        /* Can label band */
+        .can-label{position:absolute;top:40px;left:0;right:0;bottom:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 10px;text-align:center}
+        .can-brand{font-size:6px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent)}
+        .can-divider{width:24px;height:1px;background:var(--accent);opacity:0.4;margin:6px 0}
+        .can-flavor{font-size:13px;font-weight:700;color:#f5f5f7;letter-spacing:-0.01em;line-height:1.2}
+        .can-body.oat-can .can-flavor{color:#2a1d12}
+        .can-body.oat-can .can-brand{color:#6b5a3a}
+        .can-body.oat-can .can-divider{background:#6b5a3a}
+        .can-sub{font-size:7px;color:rgba(245,245,247,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px}
+        .can-body.oat-can .can-sub{color:rgba(42,29,18,0.4)}
+        .can-ml{font-size:6px;color:rgba(245,245,247,0.25);margin-top:8px;letter-spacing:0.05em}
+        .can-body.oat-can .can-ml{color:rgba(42,29,18,0.25)}
+
+        /* Metallic shimmer on can */
+        .can-body::before{content:'';position:absolute;top:0;right:-10px;width:40px;height:100%;background:linear-gradient(180deg,transparent,rgba(255,255,255,0.04),transparent);transform:skewX(-5deg);pointer-events:none}
+        .can-body::after{content:'';position:absolute;top:24px;left:8px;width:1px;height:calc(100% - 40px);background:linear-gradient(180deg,transparent,rgba(255,255,255,0.06),transparent);pointer-events:none}
+
+        /* ---- Shadows under products ---- */
+        .product-shadow{position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:70%;height:20px;background:radial-gradient(ellipse,rgba(0,0,0,0.15) 0%,transparent 70%);border-radius:50%}
+
+        /* ---- Floating labels ---- */
+        .showcase-label{position:absolute;bottom:-48px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:12px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em}
+
+        /* ===================== MARQUEE ===================== */
+        .marquee-section{padding:40px 0;overflow:hidden;border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border);background:var(--bg)}
+        .marquee-track{display:flex;gap:48px;animation:marquee 30s linear infinite;width:max-content}
+        .marquee-item{font-size:14px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.06em;text-transform:uppercase;white-space:nowrap;display:flex;align-items:center;gap:12px}
+        .marquee-dot{width:5px;height:5px;background:var(--accent);border-radius:50%;opacity:0.5}
+        @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+        /* ===================== PRODUCTS SECTION ===================== */
+        #products{background:var(--bg-alt);padding:140px 24px}
+        .section-header{text-align:center;max-width:680px;margin:0 auto 72px}
+        .section-label{font-size:14px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px}
+        .section-header h2{font-size:clamp(36px,5.5vw,60px);font-weight:700;letter-spacing:-0.035em;line-height:1.08}
+        .section-header p{font-size:19px;color:var(--text-secondary);margin-top:16px;line-height:1.6}
+
+        .products-grid{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+
+        .product-card{background:var(--card-bg);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform 0.4s ease,box-shadow 0.4s ease;position:relative}
+        .product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-xl)}
+
+        .product-card-visual{height:280px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+        .product-card-visual.sachet-bg{background:linear-gradient(135deg,#1a120a 0%,#2a1d12 50%,#3c2a18 100%)}
+        .product-card-visual.can-bg{background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 50%,#2a2a2a 100%)}
+
+        /* Mini product in card */
+        .card-sachet-group{display:flex;gap:12px;align-items:flex-end;transform:rotate(-3deg)}
+        .card-sachet{width:72px;height:100px;border-radius:4px 4px 10px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 12px 32px rgba(0,0,0,0.3)}
+        .card-sachet.s1{background:linear-gradient(170deg,#2a1d12,#0d0906);transform:translateY(-8px)}
+        .card-sachet.s2{background:linear-gradient(170deg,#d4c5a0,#a89870)}
+        .card-sachet.s3{background:linear-gradient(170deg,#6b3a1f,#2d1808);transform:translateY(-4px)}
+        .card-sachet span{font-size:6px;font-weight:700;letter-spacing:0.15em;color:var(--accent);text-transform:uppercase}
+        .card-sachet.s2 span{color:#6b5a3a}
+
+        .card-can-group{display:flex;gap:16px;align-items:flex-end}
+        .card-can{width:52px;height:140px;border-radius:8px 8px 10px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;box-shadow:0 12px 32px rgba(0,0,0,0.3)}
+        .card-can.c1{background:linear-gradient(180deg,#1a1a1a,#0a0a0a);transform:translateY(-10px)}
+        .card-can.c2{background:linear-gradient(180deg,#f0ead6,#d9cfb8)}
+        .card-can.c3{background:linear-gradient(180deg,#3c2415,#1a0f08);transform:translateY(-6px)}
+        .card-can span{font-size:5px;font-weight:700;letter-spacing:0.12em;color:var(--accent);text-transform:uppercase}
+        .card-can.c2 span{color:#6b5a3a}
+        .card-can-top{position:absolute;top:0;left:0;right:0;height:12px;background:linear-gradient(180deg,#b0b0b0,#808080);border-radius:8px 8px 0 0}
+
+        /* Glow behind card products */
+        .product-card-visual::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:60%;height:40%;background:radial-gradient(ellipse,rgba(196,155,47,0.1) 0%,transparent 70%);pointer-events:none}
+
+        .product-card-info{padding:36px 32px 40px}
+        .product-card-info h3{font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:4px}
+        .product-card-info .price{font-size:17px;font-weight:600;color:var(--accent);margin-bottom:14px}
+        .product-card-info p{font-size:15px;color:var(--text-secondary);line-height:1.65}
+
+        .flavor-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+        .flavor-pill{font-size:12px;font-weight:600;padding:6px 14px;border-radius:980px;background:var(--bg-alt);color:var(--text-secondary);border:1px solid var(--border)}
+        @media(prefers-color-scheme:dark){.flavor-pill{background:#2a2a2a;border-color:#3a3a3a}}
+
+        /* ===================== FEATURES / WHY US ===================== */
+        #why{padding:140px 24px}
+        .features-grid{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+        .feature{background:var(--card-bg);padding:44px 28px;text-align:center;transition:background 0.3s}
+        .feature:hover{background:var(--bg-alt)}
+
+        .feature-icon-wrap{width:64px;height:64px;margin:0 auto 24px;border-radius:18px;background:var(--accent-glow);display:flex;align-items:center;justify-content:center}
+        .feature-icon-wrap svg{width:28px;height:28px;stroke:var(--accent);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+        .feature h3{font-size:20px;font-weight:700;letter-spacing:-0.01em;margin-bottom:8px}
+        .feature p{font-size:14px;color:var(--text-secondary);line-height:1.6}
+
+        @media(max-width:900px){.features-grid{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:500px){.features-grid{grid-template-columns:1fr}}
+
+        /* ===================== BIG QUOTE ===================== */
+        .big-quote{padding:120px 24px;text-align:center;background:var(--bg-dark);color:#f5f5f7;position:relative;overflow:hidden}
+        .big-quote::before{content:'\201C';position:absolute;top:-40px;left:50%;transform:translateX(-50%);font-size:300px;font-weight:700;color:rgba(196,155,47,0.06);line-height:1;pointer-events:none}
+        .big-quote blockquote{max-width:700px;margin:0 auto;font-size:clamp(24px,4vw,36px);font-weight:600;letter-spacing:-0.02em;line-height:1.4;position:relative;z-index:1}
+        .big-quote .quote-author{margin-top:24px;font-size:15px;color:rgba(245,245,247,0.5);font-weight:400}
+
+        /* ===================== HOW IT WORKS ===================== */
+        #how{background:var(--bg-alt);padding:140px 24px}
+        .steps{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+        .step{text-align:center;padding:40px 28px;background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);transition:transform 0.3s,box-shadow 0.3s;position:relative}
+        .step:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+
+        .step-number{width:56px;height:56px;border-radius:50%;background:var(--text-primary);color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;margin:0 auto 20px}
+        .step h3{font-size:20px;font-weight:700;letter-spacing:-0.01em;margin-bottom:8px}
+        .step p{font-size:15px;color:var(--text-secondary);line-height:1.6}
+
+        /* Connector arrows between steps */
+        .step:not(:last-child)::after{content:'';position:absolute;top:50%;right:-20px;width:12px;height:12px;border-top:2px solid var(--border);border-right:2px solid var(--border);transform:rotate(45deg);z-index:2}
+
+        @media(max-width:768px){.steps{grid-template-columns:1fr;gap:16px}.step::after{display:none}}
+
+        /* ===================== TESTIMONIALS ===================== */
+        #reviews{padding:140px 24px}
+        .testimonials-grid{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+        .testimonial{background:var(--card-bg);border-radius:var(--radius);padding:40px 36px;box-shadow:var(--shadow);transition:transform 0.3s;position:relative}
+        .testimonial:hover{transform:translateY(-4px)}
+        .testimonial .stars{display:flex;gap:3px;margin-bottom:20px}
+        .star{width:18px;height:18px}
+        .star svg{width:18px;height:18px;fill:var(--accent)}
+        .testimonial blockquote{font-size:16px;line-height:1.65;color:var(--text-primary);margin-bottom:24px;font-style:italic}
+        .testimonial-footer{display:flex;align-items:center;gap:12px}
+        .testimonial-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--accent-glow),rgba(196,155,47,0.3));display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--accent)}
+        .testimonial-info .testimonial-author{font-size:15px;font-weight:600}
+        .testimonial-info .testimonial-handle{font-size:13px;color:var(--text-tertiary)}
+
+        /* ===================== NUMBERS ===================== */
+        .numbers{padding:100px 24px;background:var(--bg-alt);border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border)}
+        .numbers-grid{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+        .number-item .num{font-size:clamp(36px,5vw,52px);font-weight:700;letter-spacing:-0.03em;background:linear-gradient(135deg,var(--accent-dark),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .number-item .num-label{font-size:14px;color:var(--text-secondary);margin-top:4px}
+        @media(max-width:600px){.numbers-grid{grid-template-columns:repeat(2,1fr);gap:32px}}
+
+        /* ===================== WAITLIST ===================== */
+        #waitlist{padding:140px 24px;background:var(--bg)}
+        .waitlist-box{max-width:580px;margin:0 auto;text-align:center}
+        .waitlist-box h2{font-size:clamp(36px,5vw,52px);font-weight:700;letter-spacing:-0.035em;line-height:1.1}
+        .waitlist-box .sub{font-size:18px;color:var(--text-secondary);margin-top:16px;line-height:1.6}
+        .email-form{display:flex;gap:12px;margin-top:36px;flex-wrap:wrap;justify-content:center}
+        .email-form input[type="email"]{flex:1;min-width:260px;padding:18px 26px;border-radius:980px;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text-primary);font-size:17px;font-family:inherit;outline:none;transition:border-color 0.2s,box-shadow 0.2s}
+        .email-form input[type="email"]:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-glow)}
+        .email-form input[type="email"]::placeholder{color:var(--text-tertiary)}
+        .email-form button{padding:18px 36px;border-radius:980px;background:var(--text-primary);color:var(--bg);font-size:17px;font-weight:600;font-family:inherit;border:none;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 16px rgba(0,0,0,0.12)}
+        .email-form button:hover{transform:scale(1.03);box-shadow:0 8px 32px rgba(0,0,0,0.18)}
+        .form-note{font-size:13px;color:var(--text-tertiary);margin-top:16px}
+        .waitlist-perks{display:flex;gap:24px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+        .perk{font-size:13px;color:var(--text-secondary);display:flex;align-items:center;gap:6px}
+        .perk svg{width:16px;height:16px;stroke:var(--accent);fill:none;stroke-width:2}
+        .success-message{display:none;padding:24px;background:var(--accent-glow);border:1px solid rgba(196,155,47,0.2);border-radius:var(--radius-sm);margin-top:24px;font-size:17px;font-weight:500;color:var(--accent)}
+
+        /* ===================== FOOTER ===================== */
+        footer{padding:60px 24px 40px;text-align:center;border-top:0.5px solid var(--border)}
+        .footer-inner{max-width:800px;margin:0 auto}
+        .footer-logo{font-size:20px;font-weight:700;letter-spacing:-0.02em;margin-bottom:20px}
+        .footer-links{display:flex;gap:28px;justify-content:center;list-style:none;margin-bottom:28px;flex-wrap:wrap}
+        .footer-links a{font-size:14px;color:var(--text-secondary);text-decoration:none;transition:color 0.2s}
+        .footer-links a:hover{color:var(--text-primary)}
+        .footer-social{display:flex;gap:16px;justify-content:center;margin-bottom:28px}
+        .footer-social a{width:40px;height:40px;border-radius:50%;background:var(--bg-alt);display:flex;align-items:center;justify-content:center;transition:background 0.2s}
+        .footer-social a:hover{background:var(--accent-glow)}
+        .footer-social svg{width:18px;height:18px;fill:var(--text-secondary)}
+        .footer-copy{font-size:13px;color:var(--text-tertiary)}
+
+        /* ===================== ANIMATIONS ===================== */
+        @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+        .reveal{opacity:0;transform:translateY(36px);transition:opacity 0.8s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94)}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+        .reveal-delay-1{transition-delay:0.1s}
+        .reveal-delay-2{transition-delay:0.2s}
+        .reveal-delay-3{transition-delay:0.3s}
+
+        /* ===================== RESPONSIVE ===================== */
+        @media(max-width:768px){
+            .hero{padding:110px 20px 70px}
+            section{padding:100px 20px}
+            #products,#why,#how,#reviews{padding:100px 20px}
+            .hero-showcase{gap:16px;flex-wrap:wrap;justify-content:center}
+            .sachet{width:110px;height:152px}
+            .can{width:76px;height:210px}
+            .sachet-flavor{font-size:13px}
+            .email-form{flex-direction:column}
+            .email-form input[type="email"]{min-width:auto;width:100%}
+            .email-form button{width:100%}
+            .step::after{display:none}
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">Morning Standard</a>
+        <ul class="nav-links">
+            <li><a href="#products">Products</a></li>
+            <li><a href="#why">Why Us</a></li>
+            <li><a href="#how">How It Works</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#waitlist" class="nav-cta">Join Waitlist</a></li>
+        </ul>
+        <button class="nav-menu-btn" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})" aria-label="Join waitlist">&#8594;</button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-particles">
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    </div>
+    <span class="hero-badge"><span class="dot"></span> Now accepting early access</span>
+    <h1>Set Your <span class="accent">Standard.</span></h1>
+    <p class="hero-sub">Premium coffee sachets and cold brew cans crafted for people who refuse to settle. Every morning. No compromise.</p>
+    <p class="hero-founder">Founded by <strong>Simiran Jha</strong></p>
+    <div class="hero-actions">
+        <a href="#waitlist" class="btn-primary">
+            Join the Waitlist
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#products" class="btn-secondary">Explore Products</a>
+    </div>
+
+    <!-- DETAILED PRODUCT SHOWCASE -->
+    <div class="hero-showcase">
+        <!-- Sachet 1: Original Black -->
+        <div class="sachet">
+            <div class="sachet-body dark">
+                <div class="sachet-tear"><div class="sachet-tear-notch"></div></div>
+                <div class="sachet-label">
+                    <span class="sachet-brand">Morning Standard</span>
+                    <div class="sachet-line"></div>
+                    <span class="sachet-flavor">Original<br>Black</span>
+                    <span class="sachet-type">Single Origin</span>
+                </div>
+                <div class="sachet-seal"></div>
+                <span class="sachet-weight">12g / 0.42oz</span>
+            </div>
+            <div class="product-shadow"></div>
+        </div>
+
+        <!-- Can 1: Black Cold Brew -->
+        <div class="can">
+            <div class="can-body black">
+                <div class="can-top"></div>
+                <div class="can-tab"></div>
+                <div class="can-label">
+                    <span class="can-brand">Morning Standard</span>
+                    <div class="can-divider"></div>
+                    <span class="can-flavor">Black<br>Cold Brew</span>
+                    <span class="can-sub">Nitrogen Infused</span>
+                    <span class="can-ml">250ml / 8.4 fl oz</span>
+                </div>
+                <div class="can-bottom"></div>
+            </div>
+            <div class="product-shadow"></div>
+        </div>
+
+        <!-- Sachet 2: Oat Latte -->
+        <div class="sachet">
+            <div class="sachet-body oat">
+                <div class="sachet-tear"><div class="sachet-tear-notch"></div></div>
+                <div class="sachet-label">
+                    <span class="sachet-brand">Morning Standard</span>
+                    <div class="sachet-line"></div>
+                    <span class="sachet-flavor">Oat<br>Latte</span>
+                    <span class="sachet-type">Plant Based</span>
+                </div>
+                <div class="sachet-seal"></div>
+                <span class="sachet-weight">15g / 0.53oz</span>
+            </div>
+            <div class="product-shadow"></div>
+        </div>
+
+        <!-- Can 2: Oat Milk -->
+        <div class="can">
+            <div class="can-body oat-can">
+                <div class="can-top"></div>
+                <div class="can-tab"></div>
+                <div class="can-label">
+                    <span class="can-brand">Morning Standard</span>
+                    <div class="can-divider"></div>
+                    <span class="can-flavor">Oat Milk<br>Latte</span>
+                    <span class="can-sub">Smooth &amp; Creamy</span>
+                    <span class="can-ml">250ml / 8.4 fl oz</span>
+                </div>
+                <div class="can-bottom"></div>
+            </div>
+            <div class="product-shadow"></div>
+        </div>
+
+        <!-- Sachet 3: Caramel -->
+        <div class="sachet">
+            <div class="sachet-body caramel">
+                <div class="sachet-tear"><div class="sachet-tear-notch"></div></div>
+                <div class="sachet-label">
+                    <span class="sachet-brand">Morning Standard</span>
+                    <div class="sachet-line"></div>
+                    <span class="sachet-flavor">Salted<br>Caramel</span>
+                    <span class="sachet-type">Flavored Blend</span>
+                </div>
+                <div class="sachet-seal"></div>
+                <span class="sachet-weight">14g / 0.49oz</span>
+            </div>
+            <div class="product-shadow"></div>
+        </div>
+    </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+    <div class="marquee-track">
+        <span class="marquee-item"><span class="marquee-dot"></span>Specialty Grade</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Single Origin</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Zero Sugar</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Nitrogen Infused</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Compostable Packaging</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Ethically Sourced</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Fresh Roasted</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>No Artificial Flavors</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Specialty Grade</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Single Origin</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Zero Sugar</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Nitrogen Infused</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Compostable Packaging</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Ethically Sourced</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Fresh Roasted</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>No Artificial Flavors</span>
+    </div>
+</div>
+
+<!-- PRODUCTS -->
+<section id="products">
+    <div class="section-header reveal">
+        <p class="section-label">Products</p>
+        <h2>Two formats.<br>One standard.</h2>
+        <p>Whether you're at home or on the move, we've got your morning covered.</p>
+    </div>
+    <div class="products-grid">
+        <div class="product-card reveal">
+            <div class="product-card-visual sachet-bg">
+                <div class="card-sachet-group">
+                    <div class="card-sachet s1"><span>Original</span></div>
+                    <div class="card-sachet s2"><span>Oat Latte</span></div>
+                    <div class="card-sachet s3"><span>Caramel</span></div>
+                </div>
+            </div>
+            <div class="product-card-info">
+                <h3>Coffee Sachets</h3>
+                <p class="price">From $18 / box of 12</p>
+                <p>Specialty-grade instant coffee in single-serve sachets. Tear, pour, stir. Cafe-quality in 30 seconds flat.</p>
+                <div class="flavor-pills">
+                    <span class="flavor-pill">Original Black</span>
+                    <span class="flavor-pill">Oat Latte</span>
+                    <span class="flavor-pill">Vanilla</span>
+                    <span class="flavor-pill">Salted Caramel</span>
+                </div>
+            </div>
+        </div>
+        <div class="product-card reveal reveal-delay-1">
+            <div class="product-card-visual can-bg">
+                <div class="card-can-group">
+                    <div class="card-can c1"><div class="card-can-top"></div><span>Black</span></div>
+                    <div class="card-can c2"><div class="card-can-top"></div><span>Oat</span></div>
+                    <div class="card-can c3"><div class="card-can-top"></div><span>Mocha</span></div>
+                </div>
+            </div>
+            <div class="product-card-info">
+                <h3>Cold Brew Cans</h3>
+                <p class="price">From $24 / pack of 6</p>
+                <p>Smooth, nitrogen-infused cold brew in a slim can. Zero sugar. Clean energy. Perfectly chilled and ready to go.</p>
+                <div class="flavor-pills">
+                    <span class="flavor-pill">Black Cold Brew</span>
+                    <span class="flavor-pill">Oat Milk Latte</span>
+                    <span class="flavor-pill">Mocha</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+    <div class="section-header reveal">
+        <p class="section-label">Why Morning Standard</p>
+        <h2>Coffee that respects<br>your time and taste.</h2>
+    </div>
+    <div class="features-grid reveal">
+        <div class="feature">
+            <div class="feature-icon-wrap">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <h3>Specialty Grade</h3>
+            <p>Sourced from the top 3% of beans worldwide. Single-origin, ethically traded, always fresh roasted.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon-wrap">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3>30-Second Ritual</h3>
+            <p>No machines, no mess. Just tear, pour, and enjoy. Designed for real mornings.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon-wrap">
+                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Clean Ingredients</h3>
+            <p>No artificial flavors, no added sugar, no preservatives. Just coffee done right.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon-wrap">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <h3>Sustainable</h3>
+            <p>Compostable sachets. Recyclable cans. Carbon-neutral shipping.</p>
+        </div>
+    </div>
+</section>
+
+<!-- BIG QUOTE -->
+<section class="big-quote reveal">
+    <blockquote>"I didn't start Morning Standard to make another coffee brand. I started it because your morning deserves better than what's out there."</blockquote>
+    <p class="quote-author">Simiran Jha, Founder</p>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+    <div class="section-header reveal">
+        <p class="section-label">How It Works</p>
+        <h2>Simple as it should be.</h2>
+    </div>
+    <div class="steps">
+        <div class="step reveal">
+            <div class="step-number">1</div>
+            <h3>Pick your format</h3>
+            <p>Sachets for hot coffee, cans for cold brew. Mix and match to build your perfect box.</p>
+        </div>
+        <div class="step reveal reveal-delay-1">
+            <div class="step-number">2</div>
+            <h3>We deliver</h3>
+            <p>Free shipping on every order. Subscribe monthly or order one-time. No commitment.</p>
+        </div>
+        <div class="step reveal reveal-delay-2">
+            <div class="step-number">3</div>
+            <h3>Enjoy</h3>
+            <p>Tear a sachet or crack a can. Your morning just got upgraded.</p>
+        </div>
+    </div>
+</section>
+
+<!-- NUMBERS -->
+<div class="numbers reveal">
+    <div class="numbers-grid">
+        <div class="number-item">
+            <div class="num">12k+</div>
+            <div class="num-label">Waitlist signups</div>
+        </div>
+        <div class="number-item">
+            <div class="num">4.9</div>
+            <div class="num-label">Avg. taster rating</div>
+        </div>
+        <div class="number-item">
+            <div class="num">30s</div>
+            <div class="num-label">From sachet to sip</div>
+        </div>
+        <div class="number-item">
+            <div class="num">0g</div>
+            <div class="num-label">Added sugar</div>
+        </div>
+    </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section id="reviews">
+    <div class="section-header reveal">
+        <p class="section-label">Early Reviews</p>
+        <h2>People are talking.</h2>
+    </div>
+    <div class="testimonials-grid">
+        <div class="testimonial reveal">
+            <div class="stars">
+                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            </div>
+            <blockquote>"I threw out my Nespresso machine. These sachets are genuinely better and I don't have to deal with pods anymore."</blockquote>
+            <div class="testimonial-footer">
+                <div class="testimonial-avatar">S</div>
+                <div class="testimonial-info">
+                    <div class="testimonial-author">Sarah M.</div>
+                    <div class="testimonial-handle">Early access tester</div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial reveal reveal-delay-1">
+            <div class="stars">
+                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            </div>
+            <blockquote>"The cold brew cans are dangerously good. Smooth, not bitter, and the can design is so clean I keep them on my desk."</blockquote>
+            <div class="testimonial-footer">
+                <div class="testimonial-avatar">J</div>
+                <div class="testimonial-info">
+                    <div class="testimonial-author">James K.</div>
+                    <div class="testimonial-handle">Early access tester</div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial reveal reveal-delay-2">
+            <div class="stars">
+                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <div class="star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            </div>
+            <blockquote>"Finally, instant coffee that doesn't taste like instant coffee. The oat latte sachet is my daily non-negotiable now."</blockquote>
+            <div class="testimonial-footer">
+                <div class="testimonial-avatar">P</div>
+                <div class="testimonial-info">
+                    <div class="testimonial-author">Priya R.</div>
+                    <div class="testimonial-handle">Early access tester</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WAITLIST -->
+<section id="waitlist">
+    <div class="waitlist-box reveal">
+        <p class="section-label">Early Access</p>
+        <h2>Be first in line.</h2>
+        <p class="sub">Join the waitlist for early access pricing, free samples, and first dibs when we launch.</p>
+        <form class="email-form" id="waitlistForm">
+            <input type="email" placeholder="Enter your email" required aria-label="Email address">
+            <button type="submit">Join Waitlist</button>
+        </form>
+        <div class="waitlist-perks">
+            <span class="perk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Free samples</span>
+            <span class="perk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Early pricing</span>
+            <span class="perk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> No spam</span>
+        </div>
+        <p class="form-note">Unsubscribe anytime. We respect your inbox.</p>
+        <div class="success-message" id="successMsg">You're on the list. We'll be in touch soon.</div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-logo">Morning Standard</div>
+        <ul class="footer-links">
+            <li><a href="#products">Products</a></li>
+            <li><a href="#why">Why Us</a></li>
+            <li><a href="#how">How It Works</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#waitlist">Waitlist</a></li>
+        </ul>
+        <div class="footer-social">
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+            <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a>
+            <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+        </div>
+        <p class="footer-copy">&copy; 2026 Morning Standard by Simiran Jha. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+// Scroll reveal with staggered delays
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Waitlist form
+document.getElementById('waitlistForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = this.querySelector('input[type="email"]').value;
+    const waitlist = JSON.parse(localStorage.getItem('morningstandard_waitlist') || '[]');
+    waitlist.push({ email, date: new Date().toISOString() });
+    localStorage.setItem('morningstandard_waitlist', JSON.stringify(waitlist));
+    this.style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+    document.querySelector('.form-note').style.display = 'none';
+    document.querySelector('.waitlist-perks').style.display = 'none';
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+});
+
+// Parallax on hero products
+let ticking = false;
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        requestAnimationFrame(() => {
+            const scrolled = window.scrollY;
+            const showcase = document.querySelector('.hero-showcase');
+            if (showcase && scrolled < window.innerHeight) {
+                showcase.style.transform = `translateY(${scrolled * 0.15}px)`;
+                showcase.style.opacity = Math.max(0, 1 - scrolled / (window.innerHeight * 0.7));
+            }
+            ticking = false;
+        });
+        ticking = true;
+    }
+});
+</script>
+
+</body>
+</html>
