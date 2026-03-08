@@ -315,6 +315,103 @@
         .footer-social svg{width:18px;height:18px;fill:var(--text-secondary)}
         .footer-copy{font-size:13px;color:var(--text-tertiary)}
 
+        /* ===================== MODAL / PRE-ORDER ===================== */
+        .modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:24px;overflow-y:auto}
+        .modal-overlay.open{display:flex}
+        .modal{background:var(--card-bg);border-radius:var(--radius);max-width:640px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-xl);animation:modalIn 0.3s ease}
+        @keyframes modalIn{from{opacity:0;transform:scale(0.95) translateY(16px)}to{opacity:1;transform:scale(1) translateY(0)}}
+        .modal-header{display:flex;align-items:center;justify-content:space-between;padding:28px 32px 0;position:sticky;top:0;background:var(--card-bg);z-index:1;border-radius:var(--radius) var(--radius) 0 0}
+        .modal-header h2{font-size:24px;font-weight:700;letter-spacing:-0.02em}
+        .modal-close{width:36px;height:36px;border-radius:50%;border:none;background:var(--bg-alt);color:var(--text-secondary);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s}
+        .modal-close:hover{background:var(--border)}
+        .modal-body{padding:24px 32px 32px}
+
+        /* Product picker */
+        .order-product{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border)}
+        .order-product:last-of-type{border-bottom:none}
+        .order-product-info{display:flex;align-items:center;gap:14px}
+        .order-product-swatch{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;letter-spacing:0.05em;flex-shrink:0}
+        .swatch-dark{background:linear-gradient(135deg,#2a1d12,#0d0906)}
+        .swatch-oat{background:linear-gradient(135deg,#d4c5a0,#a89870);color:#2a1d12}
+        .swatch-vanilla{background:linear-gradient(135deg,#f5e6c8,#e0cfa0);color:#6b5a3a}
+        .swatch-caramel{background:linear-gradient(135deg,#6b3a1f,#2d1808)}
+        .swatch-black-can{background:linear-gradient(135deg,#1a1a1a,#000)}
+        .swatch-oat-can{background:linear-gradient(135deg,#f0ead6,#d9cfb8);color:#2a1d12}
+        .swatch-mocha{background:linear-gradient(135deg,#3c2415,#1a0f08)}
+        .order-product-name{font-size:15px;font-weight:600}
+        .order-product-price{font-size:13px;color:var(--text-secondary)}
+        .qty-control{display:flex;align-items:center;gap:0;border:1.5px solid var(--border);border-radius:10px;overflow:hidden}
+        .qty-btn{width:36px;height:36px;border:none;background:var(--bg-alt);color:var(--text-primary);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.15s;font-family:inherit}
+        .qty-btn:hover{background:var(--border)}
+        .qty-val{width:40px;text-align:center;font-size:15px;font-weight:600;border:none;background:transparent;color:var(--text-primary);font-family:inherit}
+
+        .order-summary{background:var(--bg-alt);border-radius:var(--radius-sm);padding:20px;margin-top:20px}
+        .order-summary-row{display:flex;justify-content:space-between;font-size:14px;color:var(--text-secondary);padding:4px 0}
+        .order-summary-total{display:flex;justify-content:space-between;font-size:18px;font-weight:700;padding:12px 0 0;border-top:1.5px solid var(--border);margin-top:8px}
+
+        .order-section-label{font-size:13px;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:0.06em;margin:24px 0 12px}
+
+        /* Customer info form fields */
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+        .form-row.full{grid-template-columns:1fr}
+        .form-field{display:flex;flex-direction:column;gap:4px}
+        .form-field label{font-size:13px;font-weight:500;color:var(--text-secondary)}
+        .form-field input,.form-field textarea{padding:12px 16px;border-radius:10px;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text-primary);font-size:15px;font-family:inherit;outline:none;transition:border-color 0.2s,box-shadow 0.2s}
+        .form-field input:focus,.form-field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+        .form-field textarea{resize:vertical;min-height:60px}
+
+        .btn-order{width:100%;padding:18px;border-radius:980px;background:var(--text-primary);color:var(--bg);font-size:17px;font-weight:600;font-family:inherit;border:none;cursor:pointer;margin-top:24px;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 16px rgba(0,0,0,0.12)}
+        .btn-order:hover{transform:scale(1.02);box-shadow:0 8px 32px rgba(0,0,0,0.18)}
+        .btn-order:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+
+        .order-success{text-align:center;padding:48px 24px}
+        .order-success-icon{width:72px;height:72px;border-radius:50%;background:var(--accent-glow);display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+        .order-success-icon svg{width:32px;height:32px;stroke:var(--accent);fill:none;stroke-width:2.5}
+        .order-success h3{font-size:24px;font-weight:700;margin-bottom:8px}
+        .order-success p{font-size:15px;color:var(--text-secondary);line-height:1.6}
+        .order-id{display:inline-block;background:var(--bg-alt);padding:6px 16px;border-radius:8px;font-size:14px;font-weight:600;font-family:monospace;margin-top:12px;color:var(--accent)}
+
+        @media(max-width:600px){.form-row{grid-template-columns:1fr}.modal-body{padding:20px}.modal-header{padding:20px 20px 0}}
+
+        /* ===================== ADMIN DASHBOARD ===================== */
+        .admin-page{display:none;min-height:100vh;padding:80px 24px 40px;background:var(--bg)}
+        .admin-page.active{display:block}
+        .admin-page .admin-header{max-width:1100px;margin:0 auto 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+        .admin-page .admin-header h1{font-size:28px;font-weight:700;letter-spacing:-0.02em}
+        .admin-actions{display:flex;gap:12px;flex-wrap:wrap}
+        .btn-admin{padding:10px 22px;border-radius:980px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;transition:transform 0.2s,opacity 0.2s;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text-primary)}
+        .btn-admin:hover{transform:scale(1.02)}
+        .btn-admin.primary{background:var(--text-primary);color:var(--bg);border-color:var(--text-primary)}
+
+        .admin-stats{max-width:1100px;margin:0 auto 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+        .admin-stat{background:var(--card-bg);border-radius:var(--radius-sm);padding:24px;box-shadow:var(--shadow)}
+        .admin-stat .stat-val{font-size:32px;font-weight:700;letter-spacing:-0.02em}
+        .admin-stat .stat-val.gold{color:var(--accent)}
+        .admin-stat .stat-label{font-size:13px;color:var(--text-secondary);margin-top:4px}
+
+        .admin-table-wrap{max-width:1100px;margin:0 auto;background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+        .admin-table{width:100%;border-collapse:collapse;font-size:14px}
+        .admin-table th{text-align:left;padding:14px 16px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-tertiary);background:var(--bg-alt);border-bottom:1px solid var(--border);position:sticky;top:52px;z-index:1}
+        .admin-table td{padding:14px 16px;border-bottom:1px solid var(--border);vertical-align:top}
+        .admin-table tr:last-child td{border-bottom:none}
+        .admin-table tr:hover td{background:var(--bg-alt)}
+        .order-items-list{font-size:13px;color:var(--text-secondary);line-height:1.6}
+        .order-status{display:inline-block;padding:3px 10px;border-radius:980px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em}
+        .order-status.pending{background:rgba(196,155,47,0.12);color:var(--accent)}
+        .order-status.confirmed{background:rgba(52,199,89,0.12);color:#34c759}
+
+        .admin-empty{text-align:center;padding:80px 24px;color:var(--text-tertiary);font-size:16px}
+
+        .admin-login{max-width:400px;margin:120px auto;text-align:center;padding:0 24px}
+        .admin-login h2{font-size:24px;font-weight:700;margin-bottom:8px}
+        .admin-login p{font-size:15px;color:var(--text-secondary);margin-bottom:24px}
+        .admin-login input{width:100%;padding:16px 20px;border-radius:12px;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text-primary);font-size:16px;font-family:inherit;outline:none;text-align:center;letter-spacing:0.1em;margin-bottom:16px;transition:border-color 0.2s}
+        .admin-login input:focus{border-color:var(--accent)}
+        .admin-login .btn-order{margin-top:0}
+        .admin-login-error{font-size:13px;color:#ff3b30;margin-top:8px;display:none}
+
+        @media(max-width:768px){.admin-table{font-size:12px}.admin-table th,.admin-table td{padding:10px 12px}}
+
         /* ===================== ANIMATIONS ===================== */
         @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
         .reveal{opacity:0;transform:translateY(36px);transition:opacity 0.8s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94)}
@@ -350,7 +447,7 @@
             <li><a href="#why">Why Us</a></li>
             <li><a href="#how">How It Works</a></li>
             <li><a href="#reviews">Reviews</a></li>
-            <li><a href="#waitlist" class="nav-cta">Join Waitlist</a></li>
+            <li><a href="#preorder" class="nav-cta" onclick="event.preventDefault();openPreorder()">Pre-Order</a></li>
         </ul>
         <button class="nav-menu-btn" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})" aria-label="Join waitlist">&#8594;</button>
     </div>
@@ -367,8 +464,8 @@
     <p class="hero-sub">Premium coffee sachets and cold brew cans crafted for people who refuse to settle. Every morning. No compromise.</p>
     <p class="hero-founder">Founded by <strong>Simiran Jha</strong></p>
     <div class="hero-actions">
-        <a href="#waitlist" class="btn-primary">
-            Join the Waitlist
+        <a href="#preorder" class="btn-primary" onclick="event.preventDefault();openPreorder()">
+            Pre-Order Now
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
         <a href="#products" class="btn-secondary">Explore Products</a>
@@ -704,6 +801,228 @@
     </div>
 </section>
 
+<!-- PRE-ORDER MODAL -->
+<div class="modal-overlay" id="preorderModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 id="modalTitle">Pre-Order</h2>
+            <button class="modal-close" onclick="closePreorder()">&times;</button>
+        </div>
+        <div class="modal-body" id="modalBody">
+            <!-- STEP 1: Product Selection -->
+            <div id="orderStep1">
+                <p class="order-section-label">Sachets — Box of 12</p>
+                <div class="order-product" data-id="sachet-original" data-price="18" data-name="Original Black Sachets (12)">
+                    <div class="order-product-info">
+                        <div class="order-product-swatch swatch-dark">MS</div>
+                        <div><div class="order-product-name">Original Black</div><div class="order-product-price">$18.00 / box</div></div>
+                    </div>
+                    <div class="qty-control">
+                        <button class="qty-btn" onclick="changeQty(this,-1)">-</button>
+                        <input class="qty-val" type="text" value="0" readonly>
+                        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+                    </div>
+                </div>
+                <div class="order-product" data-id="sachet-oat" data-price="20" data-name="Oat Latte Sachets (12)">
+                    <div class="order-product-info">
+                        <div class="order-product-swatch swatch-oat">MS</div>
+                        <div><div class="order-product-name">Oat Latte</div><div class="order-product-price">$20.00 / box</div></div>
+                    </div>
+                    <div class="qty-control">
+                        <button class="qty-btn" onclick="changeQty(this,-1)">-</button>
+                        <input class="qty-val" type="text" value="0" readonly>
+                        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+                    </div>
+                </div>
+                <div class="order-product" data-id="sachet-vanilla" data-price="20" data-name="Vanilla Sachets (12)">
+                    <div class="order-product-info">
+                        <div class="order-product-swatch swatch-vanilla">MS</div>
+                        <div><div class="order-product-name">Vanilla</div><div class="order-product-price">$20.00 / box</div></div>
+                    </div>
+                    <div class="qty-control">
+                        <button class="qty-btn" onclick="changeQty(this,-1)">-</button>
+                        <input class="qty-val" type="text" value="0" readonly>
+                        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+                    </div>
+                </div>
+                <div class="order-product" data-id="sachet-caramel" data-price="20" data-name="Salted Caramel Sachets (12)">
+                    <div class="order-product-info">
+                        <div class="order-product-swatch swatch-caramel">MS</div>
+                        <div><div class="order-product-name">Salted Caramel</div><div class="order-product-price">$20.00 / box</div></div>
+                    </div>
+                    <div class="qty-control">
+                        <button class="qty-btn" onclick="changeQty(this,-1)">-</button>
+                        <input class="qty-val" type="text" value="0" readonly>
+                        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+                    </div>
+                </div>
+
+                <p class="order-section-label">Cold Brew Cans — Pack of 6</p>
+                <div class="order-product" data-id="can-black" data-price="24" data-name="Black Cold Brew Cans (6)">
+                    <div class="order-product-info">
+                        <div class="order-product-swatch swatch-black-can">MS</div>
+                        <div><div class="order-product-name">Black Cold Brew</div><div class="order-product-price">$24.00 / pack</div></div>
+                    </div>
+                    <div class="qty-control">
+                        <button class="qty-btn" onclick="changeQty(this,-1)">-</button>
+                        <input class="qty-val" type="text" value="0" readonly>
+                        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+                    </div>
+                </div>
+                <div class="order-product" data-id="can-oat" data-price="26" data-name="Oat Milk Latte Cans (6)">
+                    <div class="order-product-info">
+                        <div class="order-product-swatch swatch-oat-can">MS</div>
+                        <div><div class="order-product-name">Oat Milk Latte</div><div class="order-product-price">$26.00 / pack</div></div>
+                    </div>
+                    <div class="qty-control">
+                        <button class="qty-btn" onclick="changeQty(this,-1)">-</button>
+                        <input class="qty-val" type="text" value="0" readonly>
+                        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+                    </div>
+                </div>
+                <div class="order-product" data-id="can-mocha" data-price="26" data-name="Mocha Cans (6)">
+                    <div class="order-product-info">
+                        <div class="order-product-swatch swatch-mocha">MS</div>
+                        <div><div class="order-product-name">Mocha</div><div class="order-product-price">$26.00 / pack</div></div>
+                    </div>
+                    <div class="qty-control">
+                        <button class="qty-btn" onclick="changeQty(this,-1)">-</button>
+                        <input class="qty-val" type="text" value="0" readonly>
+                        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+                    </div>
+                </div>
+
+                <div class="order-summary" id="orderSummary" style="display:none">
+                    <div id="summaryLines"></div>
+                    <div class="order-summary-total">
+                        <span>Total</span>
+                        <span id="summaryTotal">$0.00</span>
+                    </div>
+                </div>
+                <button class="btn-order" id="btnNext" onclick="goToStep2()" disabled>Continue to Details</button>
+            </div>
+
+            <!-- STEP 2: Customer Info -->
+            <div id="orderStep2" style="display:none">
+                <form id="customerForm" onsubmit="submitOrder(event)">
+                    <p class="order-section-label">Your Information</p>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label>First Name *</label>
+                            <input type="text" id="custFirst" required>
+                        </div>
+                        <div class="form-field">
+                            <label>Last Name *</label>
+                            <input type="text" id="custLast" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label>Email *</label>
+                            <input type="email" id="custEmail" required>
+                        </div>
+                        <div class="form-field">
+                            <label>Phone *</label>
+                            <input type="tel" id="custPhone" required>
+                        </div>
+                    </div>
+                    <p class="order-section-label">Shipping Address</p>
+                    <div class="form-row full">
+                        <div class="form-field">
+                            <label>Street Address *</label>
+                            <input type="text" id="custAddress" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label>City *</label>
+                            <input type="text" id="custCity" required>
+                        </div>
+                        <div class="form-field">
+                            <label>State / Province *</label>
+                            <input type="text" id="custState" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label>ZIP / Postal Code *</label>
+                            <input type="text" id="custZip" required>
+                        </div>
+                        <div class="form-field">
+                            <label>Country *</label>
+                            <input type="text" id="custCountry" value="United States" required>
+                        </div>
+                    </div>
+                    <p class="order-section-label">Notes (optional)</p>
+                    <div class="form-row full">
+                        <div class="form-field">
+                            <textarea id="custNotes" placeholder="Any special requests..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="order-summary" id="orderSummary2"></div>
+                    <button class="btn-order" type="submit">Place Pre-Order</button>
+                </form>
+            </div>
+
+            <!-- STEP 3: Confirmation -->
+            <div id="orderStep3" style="display:none">
+                <div class="order-success">
+                    <div class="order-success-icon">
+                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <h3>Pre-Order Confirmed!</h3>
+                    <p>Thank you for your order. We'll reach out via email with updates on shipping and your early access perks.</p>
+                    <div class="order-id" id="confirmOrderId"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ADMIN DASHBOARD (access via ?admin) -->
+<div class="admin-page" id="adminPage">
+    <!-- Login gate -->
+    <div class="admin-login" id="adminLogin">
+        <h2>Admin Access</h2>
+        <p>Enter your admin password to view orders.</p>
+        <input type="password" id="adminPass" placeholder="Password" onkeydown="if(event.key==='Enter')adminAuth()">
+        <button class="btn-order" onclick="adminAuth()">Log In</button>
+        <p class="admin-login-error" id="adminError">Incorrect password. Try again.</p>
+    </div>
+
+    <!-- Dashboard (hidden until auth) -->
+    <div id="adminDashboard" style="display:none">
+        <div class="admin-header">
+            <h1>Orders Dashboard</h1>
+            <div class="admin-actions">
+                <button class="btn-admin" onclick="exportCSV()">Export CSV</button>
+                <button class="btn-admin" onclick="clearOrders()">Clear All</button>
+                <button class="btn-admin primary" onclick="window.location.href=window.location.pathname">Back to Site</button>
+            </div>
+        </div>
+        <div class="admin-stats" id="adminStats"></div>
+        <div class="admin-table-wrap">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Customer</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="adminTableBody"></tbody>
+            </table>
+            <div class="admin-empty" id="adminEmpty" style="display:none">No orders yet.</div>
+        </div>
+    </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
     <div class="footer-inner">
@@ -725,7 +1044,7 @@
 </footer>
 
 <script>
-// Scroll reveal with staggered delays
+// ============ SCROLL REVEAL ============
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -736,29 +1055,30 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Waitlist form
+// ============ WAITLIST FORM ============
 document.getElementById('waitlistForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const email = this.querySelector('input[type="email"]').value;
-    const waitlist = JSON.parse(localStorage.getItem('morningstandard_waitlist') || '[]');
+    const waitlist = JSON.parse(localStorage.getItem('ms_waitlist') || '[]');
     waitlist.push({ email, date: new Date().toISOString() });
-    localStorage.setItem('morningstandard_waitlist', JSON.stringify(waitlist));
+    localStorage.setItem('ms_waitlist', JSON.stringify(waitlist));
     this.style.display = 'none';
     document.getElementById('successMsg').style.display = 'block';
     document.querySelector('.form-note').style.display = 'none';
     document.querySelector('.waitlist-perks').style.display = 'none';
 });
 
-// Smooth scroll
+// ============ SMOOTH SCROLL ============
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
+        if (this.getAttribute('href') === '#preorder') return;
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) target.scrollIntoView({ behavior: 'smooth' });
     });
 });
 
-// Parallax on hero products
+// ============ PARALLAX ============
 let ticking = false;
 window.addEventListener('scroll', () => {
     if (!ticking) {
@@ -774,6 +1094,280 @@ window.addEventListener('scroll', () => {
         ticking = true;
     }
 });
+
+// ============ PRE-ORDER SYSTEM ============
+const ORDERS_KEY = 'ms_orders';
+const ADMIN_PASS = 'morningstandard2026';
+
+function getOrders() {
+    return JSON.parse(localStorage.getItem(ORDERS_KEY) || '[]');
+}
+function saveOrders(orders) {
+    localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
+}
+function genOrderId() {
+    return 'MS-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substring(2,5).toUpperCase();
+}
+
+// Open / close modal
+function openPreorder() {
+    document.getElementById('preorderModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    resetOrderModal();
+}
+function closePreorder() {
+    document.getElementById('preorderModal').classList.remove('open');
+    document.body.style.overflow = '';
+}
+document.getElementById('preorderModal').addEventListener('click', function(e) {
+    if (e.target === this) closePreorder();
+});
+
+function resetOrderModal() {
+    document.getElementById('orderStep1').style.display = '';
+    document.getElementById('orderStep2').style.display = 'none';
+    document.getElementById('orderStep3').style.display = 'none';
+    document.getElementById('modalTitle').textContent = 'Pre-Order';
+    document.querySelectorAll('.qty-val').forEach(i => i.value = '0');
+    updateSummary();
+}
+
+// Quantity controls
+function changeQty(btn, delta) {
+    const input = btn.parentElement.querySelector('.qty-val');
+    let val = parseInt(input.value) + delta;
+    if (val < 0) val = 0;
+    if (val > 99) val = 99;
+    input.value = val;
+    updateSummary();
+}
+
+function getCartItems() {
+    const items = [];
+    document.querySelectorAll('#orderStep1 .order-product').forEach(row => {
+        const qty = parseInt(row.querySelector('.qty-val').value);
+        if (qty > 0) {
+            items.push({
+                id: row.dataset.id,
+                name: row.dataset.name,
+                price: parseFloat(row.dataset.price),
+                qty: qty,
+                subtotal: qty * parseFloat(row.dataset.price)
+            });
+        }
+    });
+    return items;
+}
+
+function updateSummary() {
+    const items = getCartItems();
+    const summaryDiv = document.getElementById('orderSummary');
+    const linesDiv = document.getElementById('summaryLines');
+    const totalSpan = document.getElementById('summaryTotal');
+    const btnNext = document.getElementById('btnNext');
+
+    if (items.length === 0) {
+        summaryDiv.style.display = 'none';
+        btnNext.disabled = true;
+        return;
+    }
+
+    summaryDiv.style.display = '';
+    btnNext.disabled = false;
+    let html = '';
+    let total = 0;
+    items.forEach(item => {
+        html += '<div class="order-summary-row"><span>' + item.name + ' x' + item.qty + '</span><span>$' + item.subtotal.toFixed(2) + '</span></div>';
+        total += item.subtotal;
+    });
+    linesDiv.innerHTML = html;
+    totalSpan.textContent = '$' + total.toFixed(2);
+}
+
+function goToStep2() {
+    const items = getCartItems();
+    if (items.length === 0) return;
+
+    document.getElementById('orderStep1').style.display = 'none';
+    document.getElementById('orderStep2').style.display = '';
+    document.getElementById('modalTitle').textContent = 'Your Details';
+
+    // Copy summary to step 2
+    let total = 0;
+    let html = '';
+    items.forEach(item => {
+        html += '<div class="order-summary-row"><span>' + item.name + ' x' + item.qty + '</span><span>$' + item.subtotal.toFixed(2) + '</span></div>';
+        total += item.subtotal;
+    });
+    html += '<div class="order-summary-total"><span>Total</span><span>$' + total.toFixed(2) + '</span></div>';
+    document.getElementById('orderSummary2').innerHTML = html;
+}
+
+function submitOrder(e) {
+    e.preventDefault();
+    const items = getCartItems();
+    let total = 0;
+    items.forEach(i => total += i.subtotal);
+
+    const order = {
+        id: genOrderId(),
+        date: new Date().toISOString(),
+        customer: {
+            firstName: document.getElementById('custFirst').value.trim(),
+            lastName: document.getElementById('custLast').value.trim(),
+            email: document.getElementById('custEmail').value.trim(),
+            phone: document.getElementById('custPhone').value.trim(),
+            address: document.getElementById('custAddress').value.trim(),
+            city: document.getElementById('custCity').value.trim(),
+            state: document.getElementById('custState').value.trim(),
+            zip: document.getElementById('custZip').value.trim(),
+            country: document.getElementById('custCountry').value.trim()
+        },
+        notes: document.getElementById('custNotes').value.trim(),
+        items: items,
+        total: total,
+        status: 'pending'
+    };
+
+    const orders = getOrders();
+    orders.unshift(order);
+    saveOrders(orders);
+
+    // Show confirmation
+    document.getElementById('orderStep2').style.display = 'none';
+    document.getElementById('orderStep3').style.display = '';
+    document.getElementById('modalTitle').textContent = 'Order Placed';
+    document.getElementById('confirmOrderId').textContent = order.id;
+
+    // Reset the form for next use
+    document.getElementById('customerForm').reset();
+    document.getElementById('custCountry').value = 'United States';
+}
+
+// ============ ADMIN DASHBOARD ============
+function checkAdmin() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('admin')) {
+        // Hide main site, show admin
+        document.querySelectorAll('nav, .hero, .marquee-section, #products, #why, .big-quote, #how, .numbers, #reviews, #waitlist, footer').forEach(el => {
+            el.style.display = 'none';
+        });
+        document.getElementById('adminPage').classList.add('active');
+
+        // Check if already authed this session
+        if (sessionStorage.getItem('ms_admin_auth') === '1') {
+            showDashboard();
+        }
+    }
+}
+
+function adminAuth() {
+    const pass = document.getElementById('adminPass').value;
+    if (pass === ADMIN_PASS) {
+        sessionStorage.setItem('ms_admin_auth', '1');
+        showDashboard();
+    } else {
+        document.getElementById('adminError').style.display = 'block';
+    }
+}
+
+function showDashboard() {
+    document.getElementById('adminLogin').style.display = 'none';
+    document.getElementById('adminDashboard').style.display = '';
+    renderAdmin();
+}
+
+function renderAdmin() {
+    const orders = getOrders();
+    const tbody = document.getElementById('adminTableBody');
+    const statsDiv = document.getElementById('adminStats');
+    const emptyDiv = document.getElementById('adminEmpty');
+
+    // Stats
+    const totalOrders = orders.length;
+    const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0);
+    const totalItems = orders.reduce((sum, o) => sum + o.items.reduce((s, i) => s + i.qty, 0), 0);
+    const avgOrder = totalOrders > 0 ? totalRevenue / totalOrders : 0;
+
+    statsDiv.innerHTML =
+        '<div class="admin-stat"><div class="stat-val">' + totalOrders + '</div><div class="stat-label">Total Orders</div></div>' +
+        '<div class="admin-stat"><div class="stat-val gold">$' + totalRevenue.toFixed(2) + '</div><div class="stat-label">Total Revenue</div></div>' +
+        '<div class="admin-stat"><div class="stat-val">' + totalItems + '</div><div class="stat-label">Items Ordered</div></div>' +
+        '<div class="admin-stat"><div class="stat-val">$' + avgOrder.toFixed(2) + '</div><div class="stat-label">Avg. Order Value</div></div>';
+
+    if (orders.length === 0) {
+        tbody.innerHTML = '';
+        emptyDiv.style.display = '';
+        return;
+    }
+    emptyDiv.style.display = 'none';
+
+    let html = '';
+    orders.forEach(order => {
+        const date = new Date(order.date);
+        const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        const timeStr = date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        const itemsHtml = order.items.map(i => i.name + ' x' + i.qty).join('<br>');
+        const statusClass = order.status === 'confirmed' ? 'confirmed' : 'pending';
+
+        html += '<tr>' +
+            '<td><strong>' + order.id + '</strong></td>' +
+            '<td>' + dateStr + '<br><span style="color:var(--text-tertiary);font-size:12px">' + timeStr + '</span></td>' +
+            '<td>' + order.customer.firstName + ' ' + order.customer.lastName + '<br><span style="color:var(--text-tertiary);font-size:12px">' + order.customer.city + ', ' + order.customer.state + '</span></td>' +
+            '<td>' + order.customer.email + '</td>' +
+            '<td>' + order.customer.phone + '</td>' +
+            '<td><div class="order-items-list">' + itemsHtml + '</div></td>' +
+            '<td><strong>$' + order.total.toFixed(2) + '</strong></td>' +
+            '<td><span class="order-status ' + statusClass + '">' + order.status + '</span></td>' +
+        '</tr>';
+    });
+    tbody.innerHTML = html;
+}
+
+function exportCSV() {
+    const orders = getOrders();
+    if (orders.length === 0) return alert('No orders to export.');
+
+    let csv = 'Order ID,Date,First Name,Last Name,Email,Phone,Address,City,State,ZIP,Country,Items,Total,Status,Notes\n';
+    orders.forEach(o => {
+        const items = o.items.map(i => i.name + ' x' + i.qty).join('; ');
+        csv += [
+            o.id,
+            new Date(o.date).toLocaleString(),
+            '"' + o.customer.firstName + '"',
+            '"' + o.customer.lastName + '"',
+            o.customer.email,
+            o.customer.phone,
+            '"' + o.customer.address + '"',
+            '"' + o.customer.city + '"',
+            '"' + o.customer.state + '"',
+            o.customer.zip,
+            '"' + o.customer.country + '"',
+            '"' + items + '"',
+            '$' + o.total.toFixed(2),
+            o.status,
+            '"' + (o.notes || '') + '"'
+        ].join(',') + '\n';
+    });
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'morning-standard-orders-' + new Date().toISOString().slice(0,10) + '.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+function clearOrders() {
+    if (confirm('Are you sure you want to delete ALL orders? This cannot be undone.')) {
+        localStorage.removeItem(ORDERS_KEY);
+        renderAdmin();
+    }
+}
+
+// Init: check for admin mode
+checkAdmin();
 </script>
 
 </body>
