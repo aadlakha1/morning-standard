@@ -1,17 +1,18 @@
-# Morning Standard
+# HYDR8
 
-Premium coffee sachets and cold brew cans by **Simiran Jha**.
+Protein & electrolyte drinks by **Simiran Jha**.
+
+**Tagline:** Beyond Water.
 
 **Live site:** https://aadlakha1.github.io/morning-standard/
-**Repo:** https://github.com/aadlakha1/morning-standard
-**Admin dashboard:** https://aadlakha1.github.io/morning-standard/?admin
+**Admin dashboard:** append `?admin` to the site URL
 
 ---
 
 ## Tech Stack
 
 - Single self-contained `index.html` (no build tools, no dependencies)
-- Apple design language (SF Pro fonts, frosted glass nav, pill buttons, scroll reveals)
+- Dark-first athletic design with neon accent colors
 - Firebase Firestore for real-time order + waitlist storage
 - Firebase Auth (email/password) for admin access
 - Hosted on GitHub Pages
@@ -31,20 +32,22 @@ Premium coffee sachets and cold brew cans by **Simiran Jha**.
 
 ## Products & Pricing
 
-### Sachets (Box of 12)
-| Flavor | Price | ID |
-|---|---|---|
-| Original Black | $18 | `sachet-original` |
-| Oat Latte | $20 | `sachet-oat` |
-| Vanilla | $20 | `sachet-vanilla` |
-| Salted Caramel | $20 | `sachet-caramel` |
+### Powder Sticks (Box of 12)
+| Flavor | Price | ID | Color |
+|---|---|---|---|
+| Green Lightning (Lemon-Lime) | $22 | `stick-lemon-lime` | Neon green |
+| Berry Burst (Mixed Berry) | $24 | `stick-berry` | Purple |
+| Citrus Shock (Orange-Grapefruit) | $22 | `stick-citrus` | Neon yellow |
+| Midnight (Unflavored) | $20 | `stick-unflavored` | Dark gray |
 
-### Cold Brew Cans (Pack of 6)
-| Flavor | Price | ID |
-|---|---|---|
-| Black Cold Brew | $24 | `can-black` |
-| Oat Milk Latte | $26 | `can-oat` |
-| Mocha | $26 | `can-mocha` |
+### RTD Cans (Pack of 6)
+| Flavor | Price | ID | Color |
+|---|---|---|---|
+| Arctic Blast (Lemon-Lime) | $28 | `can-lemon-lime` | Neon green |
+| Voltage (Tropical Punch) | $30 | `can-tropical` | Hot pink |
+| Ice Storm (Blue Raspberry) | $28 | `can-blue-rasp` | Electric blue |
+| Mango Surge (Mango) | $30 | `can-mango` | Amber |
+| Shadow (Unflavored) | $26 | `can-unflavored` | Matte black |
 
 ---
 
@@ -54,27 +57,17 @@ The site is deployed but **Firebase must be configured** for orders and admin to
 
 ### Step 1: Create Firebase Project
 1. Go to [console.firebase.google.com](https://console.firebase.google.com)
-2. **Add Project** → name it `morning-standard` → Create
+2. **Add Project** → name it `hydr8` → Create
 3. Go to **Project Settings** (gear icon) → **Your apps** → click Web (`</>`)
-4. Register app name: `morning-standard`
+4. Register app name: `hydr8`
 5. Copy the `firebaseConfig` object
 
 ### Step 2: Paste Config
-In `index.html`, find and replace this block (~line 470):
-```js
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
-};
-```
+In `index.html`, find and replace the `firebaseConfig` block with your project's config.
 
 ### Step 3: Enable Firestore
 1. Firebase Console → **Build** → **Firestore Database**
-2. **Create database** → **Production mode** → Pick region (e.g. `us-central1`) → Done
+2. **Create database** → **Production mode** → Pick region → Done
 
 ### Step 4: Deploy Security Rules
 1. Firestore → **Rules** tab
@@ -133,12 +126,13 @@ Access: append `?admin` to the site URL.
 ## Customer Pre-Order Flow
 
 1. Click **Pre-Order Now** (hero or nav)
-2. Select products and quantities (sachets + cans)
+2. Select products and quantities (sticks + cans)
 3. Live order summary with running total
 4. Click **Continue to Details**
 5. Fill in name, email, phone, shipping address, optional notes
 6. Click **Place Pre-Order** → saved to Firestore
-7. Confirmation screen with unique order ID (e.g. `MS-M4X8K2AB`)
+7. Confirmation screen with unique order ID (e.g. `H8-M4X8K2AB`)
+8. Social share buttons (X/Twitter, copy to clipboard)
 
 ---
 
@@ -146,14 +140,15 @@ Access: append `?admin` to the site URL.
 
 | Section | Description |
 |---|---|
-| **Hero** | Headline, founder credit, CTA, CSS product showcase with 3D hover effects |
-| **Marquee** | Scrolling feature highlights |
-| **Products** | Sachets + Cans cards with mini product renders and flavor pills |
-| **Why Us** | 4-feature grid (Specialty Grade, 30-Second Ritual, Clean Ingredients, Sustainable) |
+| **Hero** | "Beyond Water." headline, countdown timer, glitch text effect, CSS product showcase with 3D mouse-follow tilt |
+| **Marquee** | Scrolling feature highlights (25g Protein, Zero Sugar, Lab Tested, etc.) |
+| **Products** | Powder Sticks + RTD Cans cards with mini product renders and flavor pills |
+| **Ingredient Strip** | Scrolling transparency strip showing exact ingredient amounts |
+| **The Science** | 4-feature grid (25g Protein, Electrolytes, Zero Compromise, Instant Mix) |
 | **Big Quote** | Full-width founder quote — Simiran Jha |
-| **How It Works** | 3-step cards with connector arrows |
-| **Numbers** | Stats bar (12k+ waitlist, 4.9 rating, 30s brew, 0g sugar) |
-| **Reviews** | 3 testimonial cards with avatars and star ratings |
+| **How It Works** | 3-step cards: Pick your fuel → We deliver → Perform |
+| **Numbers** | Animated counter stats (8k+ signups, 4.9 rating, 25g protein, 0g sugar) |
+| **Athletes** | 3 testimonial cards from CrossFit athlete, marathon runner, personal trainer |
 | **Waitlist** | Email signup saved to Firestore |
 | **Footer** | Links + social icons (Instagram, TikTok, Twitter) |
 
@@ -161,11 +156,11 @@ Access: append `?admin` to the site URL.
 
 ## Design Details
 
-- **Color palette:** Gold accent `#c49b2f`, espresso `#3c2415`, cream `#f0ead6`, dark `#1d1d1f`
-- **Dark mode:** Full automatic support via `prefers-color-scheme`
+- **Color palette:** Neon green `#00ff88` primary, electric blue `#00d4ff`, hot pink `#ff2d78`, neon yellow `#e6ff00` on near-black `#0a0a0a`
+- **Always dark** — no light mode
 - **Typography:** SF Pro Display system font stack
-- **Animations:** Scroll reveal (IntersectionObserver), parallax hero, floating coffee bean particles, pulsing ambient glow, foil shine on sachets, marquee scroll
-- **Products:** Pure CSS illustrations — sachets with tear notch, dashed tear line, gold seal, weight labels. Cans with aluminum top, pull tab, bottom rim, metallic shimmer
+- **Animations:** Scroll reveal, glitch text on hero h1, countdown timer, animated number counters, mouse-follow parallax on hero products, floating diamond particles (cycling neon colors), marquee scroll
+- **Products:** Pure CSS illustrations — stick packs with diagonal stripe overlay, cans with neon color bands and glow effects, H8 seal
 - **Responsive:** Fully mobile-friendly, nav collapses, grid layouts adapt
 
 ---
@@ -201,7 +196,7 @@ Changes go live within 1-2 minutes.
 - [ ] Add real product photography to replace CSS illustrations
 - [ ] Connect payment processor (Stripe) for real transactions
 - [ ] Email notifications on new orders (Firebase Cloud Functions)
-- [ ] Custom domain (e.g. morningstandard.com)
+- [ ] Custom domain (e.g. hydr8.co)
 - [ ] Add Instagram/TikTok links to footer social icons
 - [ ] Google Analytics or Plausible for traffic tracking
 - [ ] SEO: Open Graph tags, structured data
